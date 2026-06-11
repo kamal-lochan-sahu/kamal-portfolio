@@ -1,0 +1,70 @@
+
+@import "tailwindcss";
+
+@theme {
+  --color-bg:      #090E1A;
+  --color-surface: #0F1624;
+  --color-bdr:     #1A2235;
+  --color-txt:     #F5F5F5;
+  --color-dim:     #8892B0;
+  --color-cyan:    #00E5FF;
+  --color-violet:  #7B61FF;
+  --color-success: #00C853;
+
+  --font-heading: var(--sg),    'Space Grotesk',  sans-serif;
+  --font-body:    var(--inter), 'Inter',           sans-serif;
+  --font-mono:    var(--jb),    'JetBrains Mono', monospace;
+}
+
+@keyframes float      { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-8px)} }
+@keyframes pulseGlow  { 0%,100%{box-shadow:0 0 4px #00E5FF} 50%{box-shadow:0 0 20px #00E5FF,0 0 40px #00E5FF44} }
+@keyframes scanLine   { 0%{top:-10%} 100%{top:110%} }
+@keyframes blink      { 0%,100%{opacity:1} 50%{opacity:0} }
+@keyframes glitch1    { 0%,100%{clip-path:inset(50% 0 30% 0)} 50%{clip-path:inset(10% 0 70% 0)} }
+@keyframes fadeUp     { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+@keyframes letterDrop { from{opacity:0;transform:translateY(-40px) scale(1.2)} to{opacity:1;transform:translateY(0) scale(1)} }
+@keyframes counterUp  { from{opacity:0;transform:scale(0.5)} to{opacity:1;transform:scale(1)} }
+@keyframes ripple     { 0%{transform:scale(0);opacity:0.6} 100%{transform:scale(3);opacity:0} }
+@keyframes robotFloat { 0%,100%{transform:translateY(0px) rotate(0deg)} 50%{transform:translateY(-6px) rotate(0.5deg)} }
+@keyframes eyeGlow    { 0%,100%{filter:brightness(1) drop-shadow(0 0 3px #00E5FF)} 50%{filter:brightness(1.5) drop-shadow(0 0 10px #00E5FF)} }
+@keyframes coreGlow   { 0%,100%{filter:brightness(1)} 50%{filter:brightness(2) drop-shadow(0 0 12px #7B61FF)} }
+@keyframes mouthTalk  { 0%,100%{d:path("M35 68 Q50 73 65 68")} 50%{d:path("M35 68 Q50 80 65 68")} }
+@keyframes cursorOuter{ 0%{transform:translate(-50%,-50%) scale(1);opacity:0.6} 100%{transform:translate(-50%,-50%) scale(1.5);opacity:0} }
+
+@utility animate-float      { animation: float      4s ease-in-out infinite; }
+@utility animate-pulse-glow { animation: pulseGlow  2.5s ease-in-out infinite; }
+@utility animate-fade-up    { animation: fadeUp     0.7s ease-out forwards; }
+@utility glow-cyan          { text-shadow: 0 0 15px #00E5FF, 0 0 30px #00E5FF55; }
+@utility glow-violet        { text-shadow: 0 0 15px #7B61FF; }
+@utility card-glass         { background: rgba(15,22,36,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0,229,255,0.1); }
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; cursor:none; }
+body {
+  background-color: #090E1A;
+  color: #F5F5F5;
+  font-family: var(--inter), 'Inter', sans-serif;
+  overflow: hidden;
+  cursor: none;
+}
+a, button { cursor: none; }
+
+/* Snap Scroll */
+.snap-wrap {
+  height:100vh; overflow-y:scroll;
+  scroll-snap-type:y mandatory; scroll-behavior:smooth;
+  overflow-x:hidden;
+}
+.snap-sec {
+  min-height:100vh; scroll-snap-align:start;
+  scroll-snap-stop:always; display:flex;
+  align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar          { width:3px; }
+::-webkit-scrollbar-track    { background:#090E1A; }
+::-webkit-scrollbar-thumb    { background:#1A2235; border-radius:2px; }
+::-webkit-scrollbar-thumb:hover { background:#00E5FF; }
+::selection { background:rgba(0,229,255,0.15); color:#00E5FF; }
