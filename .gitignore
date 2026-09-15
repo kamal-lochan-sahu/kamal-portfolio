@@ -20,3 +20,5 @@ __pycache__/
 # local one-off setup scripts
 add_remaining_features.py
 fix_and_wire.py
+generate_sounds.py
+update_project_links.py
