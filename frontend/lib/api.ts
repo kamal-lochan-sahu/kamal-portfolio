@@ -32,3 +32,13 @@ export async function matchJD(jd_text: string) {
     recommendation: string
   }>
 }
+
+
+export async function getGithubStats() {
+  const res = await fetch(`${BASE}/api/github/stats`)
+  if (!res.ok) throw new Error('API error')
+  return res.json() as Promise<{
+    user: { public_repos: number; followers: number; following: number; created_at: string }
+    repos: { name: string; description: string | null; stargazers_count: number; language: string | null; html_url: string; updated_at: string }[]
+  }>
+}

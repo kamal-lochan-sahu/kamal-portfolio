@@ -2,11 +2,13 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { SECTIONS } from '@/lib/constants'
+import { useLanguage } from '@/contexts/LanguageContext'
+import { playSound, toggleMute, isMuted } from '@/lib/sounds'
 
 export default function Navbar() {
   const [active, setActive] = useState('hero')
-  const [lang,   setLang]   = useState<'EN' | 'DE'>('EN')
-  const [sound,  setSound]  = useState(false)
+  const { lang, setLang } = useLanguage()
+  const [sound, setSound] = useState(!isMuted())
 
   useEffect(() => {
     const wrap = document.querySelector('.snap-wrap')
@@ -24,8 +26,10 @@ export default function Navbar() {
     return () => wrap.removeEventListener('scroll', handler)
   }, [])
 
-  const scrollTo = (id: string) =>
+  const scrollTo = (id: string) => {
+    playSound('click')
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
     <nav style={{
@@ -91,7 +95,10 @@ export default function Navbar() {
         style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 8 }}
       >
         <button
-          onClick={() => setLang(l => l === 'EN' ? 'DE' : 'EN')}
+          onClick={() => {
+            setLang(lang === 'en' ? 'de' : 'en')
+            playSound('click')
+          }}
           style={{
             padding: '6px 12px',
             fontFamily: 'var(--jb)', fontSize: 11,
@@ -100,10 +107,13 @@ export default function Navbar() {
             transition: 'all 0.2s',
           }}
         >
-          {lang === 'EN' ? '🇬🇧 EN' : '🇩🇪 DE'}
+          {lang === 'en' ? '🇬🇧 EN' : '🇩🇪 DE'}
         </button>
         <button
-          onClick={() => setSound(s => !s)}
+          onClick={() => {
+            const nowMuted = toggleMute()
+            setSound(!nowMuted)
+          }}
           style={{
             width: 34, height: 34, fontSize: 14,
             border: '1px solid #1A2235', borderRadius: 8,

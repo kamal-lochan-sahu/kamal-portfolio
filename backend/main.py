@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import ask_me, jd_matcher, health
+from routers import ask_me, jd_matcher, health, github
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -26,6 +26,7 @@ app.add_middleware(
 app.include_router(ask_me.router)
 app.include_router(jd_matcher.router)
 app.include_router(health.router)
+app.include_router(github.router)
 
 @app.get("/")
 def root():

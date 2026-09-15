@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { getGithubStats } from '@/lib/api'
 
 const USERNAME = 'kamal-lochan-sahu'
 
@@ -28,14 +29,9 @@ export default function Github() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [uRes, rRes] = await Promise.all([
-          fetch(`https://api.github.com/users/${USERNAME}`),
-          fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=6`),
-        ])
-        const u = await uRes.json()
-        const r = await rRes.json()
-        setUser(u)
-        setRepos(Array.isArray(r) ? r : [])
+        const data = await getGithubStats()
+        setUser(data.user)
+        setRepos(data.repos || [])
       } catch { /* offline graceful */ }
       finally { setLoading(false) }
     }
@@ -63,7 +59,6 @@ export default function Github() {
       </motion.div>
 
       <div style={{ maxWidth: 960, width: '100%', margin: '0 auto' }}>
-        {/* Stats row */}
         {user && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -88,7 +83,6 @@ export default function Github() {
           </motion.div>
         )}
 
-        {/* Contribution heatmap */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -103,7 +97,6 @@ export default function Github() {
           />
         </motion.div>
 
-        {/* Recent repos */}
         {!loading && repos.length > 0 && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 12 }}>
             {repos.slice(0, 6).map((repo, i) => (

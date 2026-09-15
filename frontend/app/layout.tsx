@@ -1,6 +1,10 @@
 import type { Metadata } from 'next'
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
+import '@/styles/mobile-fixes.css'
+import { LanguageProvider } from '@/contexts/LanguageContext'
+import TerminalEgg from '@/components/TerminalEgg'
+import GuidedTour from '@/components/GuidedTour'
 
 // Variable names: --sg, --inter, --jb
 // (avoids conflict with Tailwind v4 --font-* namespace)
@@ -32,7 +36,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${sg.variable} ${inter.variable} ${jb.variable}`}>
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>
+          {children}
+          <TerminalEgg />
+          <GuidedTour />
+        </LanguageProvider>
+      </body>
     </html>
   )
 }
