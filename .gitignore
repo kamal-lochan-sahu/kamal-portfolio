@@ -16,3 +16,7 @@ backend/*.pyc
 .env
 __pycache__/
 *.pyc
+
+# local one-off setup scripts
+add_remaining_features.py
+fix_and_wire.py

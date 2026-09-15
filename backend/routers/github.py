@@ -9,7 +9,10 @@ GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
 
 def _headers():
-    headers = {"Accept": "application/vnd.github+json"}
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "kamal-portfolio-backend",
+    }
     if GITHUB_TOKEN:
         headers["Authorization"] = f"Bearer {GITHUB_TOKEN}"
     return headers
