@@ -8,12 +8,12 @@ let sounds: Record<SoundName, Howl> | null = null;
 function getSounds(): Record<SoundName, Howl> {
   if (!sounds) {
     sounds = {
-      click: new Howl({ src: ['/sounds/click.mp3'], volume: 0.3 }),
-      hover: new Howl({ src: ['/sounds/hover.mp3'], volume: 0.12 }),
-      success: new Howl({ src: ['/sounds/success.mp3'], volume: 0.4 }),
-      boot: new Howl({ src: ['/sounds/boot.mp3'], volume: 0.3 }),
-      open: new Howl({ src: ['/sounds/open.mp3'], volume: 0.25 }),
-      close: new Howl({ src: ['/sounds/close.mp3'], volume: 0.25 }),
+      click: new Howl({ src: ['/sounds/click.wav'], volume: 0.3 }),
+      hover: new Howl({ src: ['/sounds/hover.wav'], volume: 0.12 }),
+      success: new Howl({ src: ['/sounds/success.wav'], volume: 0.4 }),
+      boot: new Howl({ src: ['/sounds/boot.wav'], volume: 0.3 }),
+      open: new Howl({ src: ['/sounds/open.wav'], volume: 0.25 }),
+      close: new Howl({ src: ['/sounds/close.wav'], volume: 0.25 }),
     };
   }
   return sounds;
