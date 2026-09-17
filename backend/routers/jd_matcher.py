@@ -1,7 +1,9 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from services.gemini import match_jd
+import logging
 
+logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/jd", tags=["JD Matcher"])
 
 class JDRequest(BaseModel):
@@ -25,4 +27,5 @@ async def match(req: JDRequest):
         result = await match_jd(req.jd_text)
         return JDResponse(**result)
     except Exception as e:
-        raise HTTPException(500, f"AI error: {str(e)}")
+        logger.error(f"match_jd failed: {e}")
+        raise HTTPException(500, "Something went wrong analyzing the job description. Please try again.")

@@ -70,10 +70,10 @@ export default function GuidedTour() {
         <button
           onClick={start}
           style={{
-            position: 'fixed', bottom: 20, right: 90, zIndex: 50,
+            position: 'fixed', bottom: 20, left: 20, zIndex: 50,
             padding: '8px 14px', borderRadius: 20,
             background: '#0F1624', border: '1px solid #7B61FF', color: '#7B61FF',
-            fontSize: 13, cursor: 'pointer',
+            fontSize: 13, cursor: 'none',
           }}
         >
           ▶ Guided Tour
@@ -94,20 +94,20 @@ export default function GuidedTour() {
           </div>
           <div style={{ color: '#C7CEDB', fontSize: 14, marginBottom: 12 }}>{current.message}</div>
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
-            <button onClick={stop} style={{ background: 'none', border: 'none', color: '#8A93A6', cursor: 'pointer', fontSize: 13 }}>
+            <button onClick={stop} style={{ background: 'none', border: 'none', color: '#8A93A6', cursor: 'none', fontSize: 13 }}>
               Exit
             </button>
             <div style={{ display: 'flex', gap: 8 }}>
               <button
                 onClick={prev}
                 disabled={stepIndex === 0}
-                style={{ padding: '6px 12px', borderRadius: 6, border: '1px solid #1A2235', background: 'transparent', color: '#C7CEDB', cursor: 'pointer', opacity: stepIndex === 0 ? 0.4 : 1 }}
+                style={{ padding: '6px 12px', borderRadius: 6, border: '1px solid #1A2235', background: 'transparent', color: '#C7CEDB', cursor: 'none', opacity: stepIndex === 0 ? 0.4 : 1 }}
               >
                 Back
               </button>
               <button
                 onClick={next}
-                style={{ padding: '6px 12px', borderRadius: 6, border: 'none', background: '#7B61FF', color: '#fff', cursor: 'pointer' }}
+                style={{ padding: '6px 12px', borderRadius: 6, border: 'none', background: '#7B61FF', color: '#fff', cursor: 'none' }}
               >
                 {stepIndex + 1 === TOUR_STEPS.length ? 'Finish' : 'Next'}
               </button>

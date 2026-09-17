@@ -1,7 +1,9 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from services.gemini import ask_kamal
+import logging
 
+logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/ask", tags=["Ask Me"])
 
 SUGGESTIONS = [
@@ -38,4 +40,5 @@ async def ask(req: AskRequest):
         answer = await ask_kamal(req.question)
         return AskResponse(answer=answer, question=req.question)
     except Exception as e:
-        raise HTTPException(500, f"AI error: {str(e)}")
+        logger.error(f"ask_kamal failed: {e}")
+        raise HTTPException(500, "Something went wrong generating a response. Please try again.")

@@ -1,6 +1,6 @@
 
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import Navbar          from '@/components/layout/Navbar'
 import AvatarCompanion from '@/components/avatar/AvatarCompanion'
@@ -20,13 +20,28 @@ const EntryAnimation = dynamic(
 
 export default function Home() {
   const [entryDone, setEntryDone] = useState(false)
+  const [showEntry, setShowEntry] = useState(false)
+
+  useEffect(() => {
+    const seen = sessionStorage.getItem('kamal-portfolio-intro-seen')
+    if (seen) {
+      setEntryDone(true)
+    } else {
+      setShowEntry(true)
+    }
+  }, [])
+
+  const completeEntry = () => {
+    sessionStorage.setItem('kamal-portfolio-intro-seen', '1')
+    setEntryDone(true)
+  }
 
   return (
     <>
       <CustomCursor />
 
-      {!entryDone && (
-        <EntryAnimation onComplete={() => setEntryDone(true)} />
+      {showEntry && !entryDone && (
+        <EntryAnimation onComplete={completeEntry} />
       )}
 
       <div style={{

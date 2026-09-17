@@ -60,6 +60,11 @@ export default function MagneticButton({ children, onClick, href, variant = 'pri
       whileTap={{ scale: 0.97 }}
       style={base}
       onClick={onClick}
+      role={href ? undefined : 'button'}
+      tabIndex={href ? undefined : 0}
+      onKeyDown={href ? undefined : (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick?.() }
+      }}
     >
       {children}
     </motion.div>

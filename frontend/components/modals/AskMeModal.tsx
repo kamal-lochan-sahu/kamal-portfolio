@@ -136,7 +136,7 @@ export default function AskMeModal({ open, onClose }: Props) {
                   borderRadius: m.role==='user' ? '14px 14px 4px 14px' : '14px 14px 14px 4px',
                   background: m.role==='user' ? 'rgba(0,229,255,0.1)' : 'rgba(26,34,53,0.8)',
                   border:`1px solid ${m.role==='user' ? 'rgba(0,229,255,0.25)' : 'rgba(26,34,53,0.6)'}`,
-                  fontFamily:'var(--body)', fontSize:'0.9rem',
+                  fontFamily:'var(--font-body)', fontSize:'0.9rem',
                   color: m.role==='user' ? '#00E5FF' : '#F5F5F5', lineHeight:1.65,
                 }}>
                   {m.text}

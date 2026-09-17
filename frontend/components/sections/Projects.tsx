@@ -4,11 +4,12 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
 import { PROJECTS } from '@/lib/constants'
+import { useLanguage } from '@/contexts/LanguageContext'
 
-const TABS = [
-  { key:'flagship',   label:'⭐ Flagship',       filter:(p:typeof PROJECTS[0])=>p.tier===1 },
-  { key:'ai',         label:'🧠 AI Systems',     filter:(p:typeof PROJECTS[0])=>p.tier===2 },
-  { key:'production', label:'💼 Production',     filter:(p:typeof PROJECTS[0])=>p.tier===3 },
+const TAB_KEYS = [
+  { key:'flagship',   tKey:'tabFlagship'   as const, filter:(p:typeof PROJECTS[0])=>p.tier===1 },
+  { key:'ai',         tKey:'tabAI'         as const, filter:(p:typeof PROJECTS[0])=>p.tier===2 },
+  { key:'production', tKey:'tabProduction' as const, filter:(p:typeof PROJECTS[0])=>p.tier===3 },
 ]
 const STATUS: Record<string,{bg:string;color:string;label:string}> = {
   live: { bg:'rgba(0,200,83,0.1)',   color:'#00C853', label:'🟢 Live'  },
@@ -17,8 +18,9 @@ const STATUS: Record<string,{bg:string;color:string;label:string}> = {
 }
 
 export default function Projects() {
+  const { t, tProjectTagline } = useLanguage()
   const [tab, setTab] = useState('flagship')
-  const shown = PROJECTS.filter(TABS.find(t=>t.key===tab)!.filter)
+  const shown = PROJECTS.filter(TAB_KEYS.find(x=>x.key===tab)!.filter)
 
   return (
     <section id="projects" className="snap-sec"
@@ -35,27 +37,27 @@ export default function Projects() {
         transition={{duration:0.6}} viewport={{once:true}}
         style={{ textAlign:'center', marginBottom:28 }}>
         <p style={{ fontFamily:'var(--jb)', color:'#7B61FF', fontSize:12, letterSpacing:'0.22em', marginBottom:8 }}>
-          — PROJECTS —
+          {t('projectsEyebrow')}
         </p>
         <h2 style={{ fontFamily:'var(--sg)', fontWeight:900, fontSize:'3rem', color:'#F5F5F5' }}>
-          My Work
+          {t('projectsHeading')}
         </h2>
       </motion.div>
 
       <div style={{ display:'flex', gap:8, justifyContent:'center', marginBottom:28 }}>
-        {TABS.map(t => (
-          <motion.button key={t.key} onClick={()=>setTab(t.key)}
+        {TAB_KEYS.map(tb => (
+          <motion.button key={tb.key} onClick={()=>setTab(tb.key)}
             whileHover={{ scale:1.04 }} whileTap={{ scale:0.97 }}
             style={{
               padding:'8px 20px',
               fontFamily:'var(--jb)', fontSize:13, cursor:'none',
-              border:`1px solid ${tab===t.key?'#00E5FF':'#1A2235'}`,
+              border:`1px solid ${tab===tb.key?'#00E5FF':'#1A2235'}`,
               borderRadius:10,
-              background: tab===t.key?'rgba(0,229,255,0.1)':'transparent',
-              color: tab===t.key?'#00E5FF':'#8892B0',
+              background: tab===tb.key?'rgba(0,229,255,0.1)':'transparent',
+              color: tab===tb.key?'#00E5FF':'#8892B0',
               transition:'all 0.2s',
             }}>
-            {t.label}
+            {t(tb.tKey)}
           </motion.button>
         ))}
       </div>
@@ -101,7 +103,7 @@ export default function Projects() {
                       <div>
                         <h3 style={{ fontFamily:'var(--sg)', fontWeight:800, fontSize:'1.3rem', color:'#F5F5F5', marginBottom:3 }}>
                           {p.title}
-                          {p.tier===1 && <span style={{ marginLeft:8, fontSize:11, color:'#00E5FF', fontFamily:'var(--jb)' }}>★ FLAGSHIP</span>}
+                          {p.tier===1 && <span style={{ marginLeft:8, fontSize:11, color:'#00E5FF', fontFamily:'var(--jb)' }}>{t('flagshipBadge')}</span>}
                         </h3>
                         <p style={{ fontFamily:'var(--jb)', fontSize:12, color:'#8892B0' }}>{p.subtitle}</p>
                       </div>
@@ -117,7 +119,7 @@ export default function Projects() {
                       fontFamily:'var(--sg)', fontSize:13,
                       color:'rgba(245,245,245,0.5)', fontStyle:'italic', lineHeight:1.55,
                     }}>
-                      &ldquo;{p.tagline}&rdquo;
+                      &ldquo;{tProjectTagline(p.id, p.tagline)}&rdquo;
                     </p>
 
                     <div style={{ display:'flex', alignItems:'center', gap:8 }}>
@@ -147,7 +149,7 @@ export default function Projects() {
                         }}
                           onMouseEnter={e=>{ (e.currentTarget as HTMLElement).style.borderColor='#00E5FF';(e.currentTarget as HTMLElement).style.color='#00E5FF' }}
                           onMouseLeave={e=>{ (e.currentTarget as HTMLElement).style.borderColor='#1A2235';(e.currentTarget as HTMLElement).style.color='#8892B0' }}
-                        >GitHub →</a>
+                        >{t('githubBtn')}</a>
                       )}
                       {p.demo!=='#' ? (
                         <a href={p.demo} target="_blank" rel="noreferrer" style={{
@@ -156,13 +158,13 @@ export default function Projects() {
                           border:'1px solid rgba(0,229,255,0.3)', borderRadius:10,
                           fontFamily:'var(--jb)', fontSize:12, color:'#00E5FF',
                           textDecoration:'none',
-                        }}>Live Demo ↗</a>
+                        }}>{t('liveDemo')}</a>
                       ) : (
                         <span style={{
                           flex:1, padding:'9px 0', textAlign:'center',
                           border:'1px solid #1A2235', borderRadius:10,
                           fontFamily:'var(--jb)', fontSize:12, color:'#1A2235',
-                        }}>{p.status==='demo'?'Video Demo':'Coming Soon'}</span>
+                        }}>{p.status==='demo'?t('videoDemo'):t('comingSoon')}</span>
                       )}
                     </div>
                   </div>

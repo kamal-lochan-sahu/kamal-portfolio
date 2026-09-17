@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { getGithubStats } from '@/lib/api'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const USERNAME = 'kamal-lochan-sahu'
 
@@ -22,6 +23,7 @@ interface GHRepo {
 }
 
 export default function Github() {
+  const { t } = useLanguage()
   const [user,  setUser]  = useState<GHUser | null>(null)
   const [repos, setRepos] = useState<GHRepo[]>([])
   const [loading, setLoading] = useState(true)
@@ -52,9 +54,9 @@ export default function Github() {
         viewport={{ once: true }}
         style={{ textAlign: 'center', marginBottom: 28 }}
       >
-        <p style={{ fontFamily: 'var(--jb)', color: '#00E5FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 6 }}>— GITHUB —</p>
+        <p style={{ fontFamily: 'var(--jb)', color: '#00E5FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 6 }}>{t('githubEyebrow')}</p>
         <h2 style={{ fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '2.8rem', color: '#F5F5F5' }}>
-          Always <span style={{ color: '#00E5FF' }}>Building</span>
+          {t('githubHeadingLead')} <span style={{ color: '#00E5FF' }}>{t('githubHeadingHighlight')}</span>
         </h2>
       </motion.div>
 
@@ -68,9 +70,9 @@ export default function Github() {
             style={{ display: 'flex', gap: 12, justifyContent: 'center', marginBottom: 24, flexWrap: 'wrap' }}
           >
             {[
-              { value: user.public_repos, label: 'Repositories' },
-              { value: user.followers,    label: 'Followers'     },
-              { value: user.following,    label: 'Following'     },
+              { value: user.public_repos, label: t('statRepos') },
+              { value: user.followers,    label: t('statFollowers') },
+              { value: user.following,    label: t('statFollowing') },
             ].map(s => (
               <div key={s.label} style={{
                 padding: '14px 28px', background: '#0F1624',
@@ -138,7 +140,7 @@ export default function Github() {
 
         {loading && (
           <div style={{ textAlign: 'center', fontFamily: 'var(--jb)', fontSize: 13, color: '#8892B0' }}>
-            Loading GitHub data...
+            {t('loadingGithub')}
           </div>
         )}
       </div>

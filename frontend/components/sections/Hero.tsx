@@ -1,10 +1,11 @@
 
 'use client'
 import { motion } from 'framer-motion'
-import { STATS, SUB_LINE, EMAIL } from '@/lib/constants'
+import { STATS, EMAIL } from '@/lib/constants'
 import MagneticButton  from '@/components/ui/MagneticButton'
 import ParticleBackground from '@/components/ui/ParticleBackground'
 import SVGRobot from '@/components/avatar/SVGRobot'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const up = (d: number) => ({
   initial:{ opacity:0, y:32 }, animate:{ opacity:1, y:0 },
@@ -12,6 +13,7 @@ const up = (d: number) => ({
 })
 
 export default function Hero() {
+  const { t } = useLanguage()
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior:'smooth' })
 
@@ -40,7 +42,7 @@ export default function Hero() {
             fontFamily:'var(--jb)', color:'#00E5FF', fontSize:12,
             letterSpacing:'0.28em', marginBottom:22,
           }}>
-            &gt;_ Namaste, I&apos;m
+            {t('heroGreeting')}
           </motion.p>
 
           <motion.h1 {...up(0.35)} style={{
@@ -58,17 +60,17 @@ export default function Hero() {
             fontFamily:'var(--sg)', fontSize:'clamp(1rem,1.8vw,1.25rem)',
             color:'rgba(245,245,245,0.7)', lineHeight:1.75, marginBottom:12,
           }}>
-            I build systems that{' '}
-            <span style={{ color:'#00E5FF', fontWeight:700, textShadow:'0 0 20px #00E5FF66' }}>think</span>,{' '}
-            <span style={{ color:'#7B61FF', fontWeight:700, textShadow:'0 0 20px #7B61FF66' }}>predict</span>, and{' '}
-            <span style={{ color:'#00E5FF', fontWeight:700, textShadow:'0 0 20px #00E5FF66' }}>act</span>
-            {' '}— <span style={{ color:'rgba(245,245,245,0.35)' }}>without being told twice.</span>
+            {t('heroLead')}{' '}
+            <span style={{ color:'#00E5FF', fontWeight:700, textShadow:'0 0 20px #00E5FF66' }}>{t('heroThink')}</span>,{' '}
+            <span style={{ color:'#7B61FF', fontWeight:700, textShadow:'0 0 20px #7B61FF66' }}>{t('heroPredict')}</span>,{' '}
+            <span style={{ color:'#00E5FF', fontWeight:700, textShadow:'0 0 20px #00E5FF66' }}>{t('heroAct')}</span>
+            {' '}<span style={{ color:'rgba(245,245,245,0.35)' }}>{t('heroTail')}</span>
           </motion.p>
 
           <motion.p {...up(0.6)} style={{
             fontFamily:'var(--jb)', fontSize:12, color:'#8892B0',
             letterSpacing:'0.09em', marginBottom:36,
-          }}>{SUB_LINE}</motion.p>
+          }}>{t('heroSubLine')}</motion.p>
 
           <motion.div {...up(0.7)} style={{ display:'flex', flexWrap:'wrap', gap:10, marginBottom:44 }}>
             {STATS.map((s,i) => (
@@ -89,10 +91,10 @@ export default function Hero() {
 
           <motion.div {...up(0.85)} style={{ display:'flex', gap:18, flexWrap:'wrap' }}>
             <MagneticButton variant="primary" onClick={() => scrollTo('skills')}>
-              View My Work ↓
+              {t('viewWork')}
             </MagneticButton>
             <MagneticButton variant="outline" href={`mailto:${EMAIL}`}>
-              Hire Me
+              {t('hireMe')}
             </MagneticButton>
           </motion.div>
         </div>
@@ -123,9 +125,9 @@ export default function Hero() {
       >
         <span style={{ width:8, height:8, borderRadius:'50%', background:'#00C853',
           display:'inline-block', boxShadow:'0 0 8px #00C853', animation:'pulse 2s infinite' }}/>
-        <span style={{ fontFamily:'var(--jb)', fontSize:12, color:'#8892B0' }}>Currently building:</span>
+        <span style={{ fontFamily:'var(--jb)', fontSize:12, color:'#8892B0' }}>{t('currentlyBuilding')}</span>
         <span style={{ fontFamily:'var(--jb)', fontSize:12, fontWeight:700, color:'#00C853' }}>CORTEX</span>
-        <span style={{ fontFamily:'var(--jb)', fontSize:12, color:'rgba(136,146,176,0.45)' }}>— Autonomous Factory AI</span>
+        <span style={{ fontFamily:'var(--jb)', fontSize:12, color:'rgba(136,146,176,0.45)' }}>{t('currentlyBuildingDesc')}</span>
       </motion.div>
     </section>
   )

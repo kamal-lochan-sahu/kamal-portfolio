@@ -155,7 +155,7 @@ export default function JDMatcherModal({ open, onClose }: Props) {
 
                 {/* Summary */}
                 <div style={{ padding: 16, background: '#090E1A', borderRadius: 12, border: '1px solid #1A2235' }}>
-                  <p style={{ fontFamily: 'var(--body)', fontSize: '0.9rem', color: 'rgba(245,245,245,0.8)', lineHeight: 1.7 }}>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'rgba(245,245,245,0.8)', lineHeight: 1.7 }}>
                     {result.summary}
                   </p>
                 </div>
@@ -170,7 +170,7 @@ export default function JDMatcherModal({ open, onClose }: Props) {
                       <div key={i} style={{
                         padding: '8px 12px', background: 'rgba(0,200,83,0.06)',
                         border: '1px solid rgba(0,200,83,0.2)', borderRadius: 8,
-                        fontFamily: 'var(--body)', fontSize: '0.85rem', color: '#F5F5F5',
+                        fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#F5F5F5',
                       }}>
                         {s}
                       </div>
@@ -189,7 +189,7 @@ export default function JDMatcherModal({ open, onClose }: Props) {
                         <div key={i} style={{
                           padding: '8px 12px', background: 'rgba(255,165,0,0.06)',
                           border: '1px solid rgba(255,165,0,0.2)', borderRadius: 8,
-                          fontFamily: 'var(--body)', fontSize: '0.85rem', color: '#F5F5F5',
+                          fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#F5F5F5',
                         }}>
                           {g}
                         </div>
@@ -224,7 +224,7 @@ export default function JDMatcherModal({ open, onClose }: Props) {
                   border: '1px solid rgba(123,97,255,0.3)', borderRadius: 12,
                 }}>
                   <p style={{ fontFamily: 'var(--jb)', fontSize: 11, color: '#7B61FF', marginBottom: 6 }}>RECOMMENDATION</p>
-                  <p style={{ fontFamily: 'var(--body)', fontSize: '0.9rem', color: '#F5F5F5', lineHeight: 1.6 }}>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: '#F5F5F5', lineHeight: 1.6 }}>
                     {result.recommendation}
                   </p>
                 </div>

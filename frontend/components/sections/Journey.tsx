@@ -1,5 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const MILESTONES = [
   { year: '2019', title: 'Class 10 — Top District Scorer', sub: 'Strong math foundation · 81.3%', color: '#8892B0', side: 'left' },
@@ -14,6 +15,7 @@ const MILESTONES = [
 ]
 
 export default function Journey() {
+  const { t, tMilestone } = useLanguage()
   return (
     <section id="journey" className="snap-sec" style={{ flexDirection: 'column', padding: '80px 24px 24px', overflow: 'hidden' }}>
       <motion.div
@@ -23,9 +25,9 @@ export default function Journey() {
         viewport={{ once: true }}
         style={{ textAlign: 'center', marginBottom: 32 }}
       >
-        <p style={{ fontFamily: 'var(--jb)', color: '#00E5FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 6 }}>— JOURNEY —</p>
+        <p style={{ fontFamily: 'var(--jb)', color: '#00E5FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 6 }}>{t('journeyEyebrow')}</p>
         <h2 style={{ fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '2.8rem', color: '#F5F5F5' }}>
-          Berhampur → <span style={{ color: '#00E5FF' }}>Germany</span>
+          {t('journeyHeadingPrefix')} <span style={{ color: '#00E5FF' }}>{t('journeyHeadingHighlight')}</span>
         </h2>
       </motion.div>
 
@@ -40,7 +42,9 @@ export default function Journey() {
           transform: 'translateX(-50%)', zIndex: 0,
         }} />
 
-        {MILESTONES.map((m, i) => (
+        {MILESTONES.map((m, i) => {
+          const tm = tMilestone(i, { title: m.title, sub: m.sub })
+          return (
           <motion.div
             key={i}
             initial={{ opacity: 0, x: m.side === 'left' ? -30 : 30 }}
@@ -74,11 +78,12 @@ export default function Journey() {
               maxWidth: 280,
             }}>
               <span style={{ fontFamily: 'var(--jb)', fontSize: 11, color: m.color, fontWeight: 700 }}>{m.year}</span>
-              <p style={{ fontFamily: 'var(--sg)', fontWeight: 600, fontSize: '0.9rem', color: '#F5F5F5', margin: '3px 0' }}>{m.title}</p>
-              <p style={{ fontFamily: 'var(--jb)', fontSize: 11, color: '#8892B0', lineHeight: 1.4 }}>{m.sub}</p>
+              <p style={{ fontFamily: 'var(--sg)', fontWeight: 600, fontSize: '0.9rem', color: '#F5F5F5', margin: '3px 0' }}>{tm.title}</p>
+              <p style={{ fontFamily: 'var(--jb)', fontSize: 11, color: '#8892B0', lineHeight: 1.4 }}>{tm.sub}</p>
             </div>
           </motion.div>
-        ))}
+          )
+        })}
       </div>
     </section>
   )
