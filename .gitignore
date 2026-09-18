@@ -8,6 +8,8 @@ frontend/.env.production
 backend/__pycache__/
 backend/.env
 backend/venv/
+backend/.venv/
+backend/env/
 backend/*.pyc
 
 # General

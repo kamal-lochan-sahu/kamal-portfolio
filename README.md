@@ -13,6 +13,7 @@ kamal-portfolio/
 ## Run Frontend
 ```bash
 cd frontend
+cp .env.example .env.local   # then fill in NEXT_PUBLIC_API_URL if needed
 npm run dev
 # → http://localhost:3000
 ```
@@ -20,6 +21,7 @@ npm run dev
 ## Run Backend (Script 3 onwards)
 ```bash
 cd backend
+cp .env.example .env   # then fill in GEMINI_API_KEY and GITHUB_TOKEN
 pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
 # → http://localhost:8000
