@@ -7,11 +7,24 @@ export default function CustomCursor() {
   const ringRef  = useRef<HTMLDivElement>(null)
   const [hovered, setHovered] = useState(false)
   const [clicked, setClicked] = useState(false)
+  const [enabled, setEnabled] = useState(false)
   const pos = useRef({ x: 0, y: 0 })
   const ring = useRef({ x: 0, y: 0 })
   const raf  = useRef(0)
 
   useEffect(() => {
+    // Only show the custom cursor where a real mouse is actually present —
+    // on touch-only devices there's no mousemove to position it, so it
+    // would otherwise sit as a stray dot pinned at (0,0).
+    const mq = window.matchMedia('(pointer: fine)')
+    setEnabled(mq.matches)
+    const onChange = (e: MediaQueryListEvent) => setEnabled(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  useEffect(() => {
+    if (!enabled) return
     const onMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY }
       if (dotRef.current) {
@@ -58,7 +71,9 @@ export default function CustomCursor() {
       document.removeEventListener('click', onClick)
       obs.disconnect()
     }
-  }, [])
+  }, [enabled])
+
+  if (!enabled) return null
 
   return (
     <>

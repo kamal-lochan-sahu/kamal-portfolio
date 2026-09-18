@@ -39,15 +39,22 @@
 @utility card-glass         { background: rgba(15,22,36,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0,229,255,0.1); }
 
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-html { scroll-behavior:smooth; cursor:none; }
+html { scroll-behavior:smooth; }
 body {
   background-color: #090E1A;
   color: #F5F5F5;
   font-family: var(--inter), 'Inter', sans-serif;
   overflow: hidden;
-  cursor: none;
 }
-a, button { cursor: none; }
+
+/* Custom cursor only makes sense with a real mouse — leave native touch
+   behavior (tap highlight, native cursor) alone on touch/coarse-pointer
+   devices, where CustomCursor.tsx also doesn't render */
+@media (pointer: fine) {
+  html { cursor: none; }
+  body { cursor: none; }
+  a, button { cursor: none; }
+}
 
 /* Snap Scroll */
 .snap-wrap {

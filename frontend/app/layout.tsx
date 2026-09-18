@@ -27,10 +27,24 @@ const jb = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://kamal-portfolio-ten.vercel.app'),
   title: 'Kamal Lochan Sahu — AI & Robotics Engineer',
   description: 'I build systems that think, predict, and act — without being told twice.',
   keywords: ['AI Engineer', 'Robotics', 'Full Stack', 'ML', 'NEXUS', 'CORTEX', 'Germany'],
   authors: [{ name: 'Kamal Lochan Sahu' }],
+  openGraph: {
+    title: 'Kamal Lochan Sahu — AI & Robotics Engineer',
+    description: 'I build systems that think, predict, and act — without being told twice.',
+    url: 'https://kamal-portfolio-ten.vercel.app',
+    siteName: 'Kamal Lochan Sahu',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Kamal Lochan Sahu — AI & Robotics Engineer',
+    description: 'I build systems that think, predict, and act — without being told twice.',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
