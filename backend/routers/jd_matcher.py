@@ -1,10 +1,13 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel
 from services.gemini import match_jd
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 import logging
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/jd", tags=["JD Matcher"])
+limiter = Limiter(key_func=get_remote_address)
 
 class JDRequest(BaseModel):
     jd_text: str
@@ -18,7 +21,8 @@ class JDResponse(BaseModel):
     recommendation: str
 
 @router.post("/match", response_model=JDResponse)
-async def match(req: JDRequest):
+@limiter.limit("5/minute")
+async def match(request: Request, req: JDRequest):
     if not req.jd_text.strip():
         raise HTTPException(400, "JD text cannot be empty")
     if len(req.jd_text) > 5000:

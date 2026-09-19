@@ -1,10 +1,13 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel
 from services.gemini import ask_kamal
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 import logging
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/ask", tags=["Ask Me"])
+limiter = Limiter(key_func=get_remote_address)
 
 SUGGESTIONS = [
     "Tell me about NEXUS",
@@ -31,7 +34,8 @@ async def suggestions():
     return {"questions": SUGGESTIONS}
 
 @router.post("/", response_model=AskResponse)
-async def ask(req: AskRequest):
+@limiter.limit("10/minute")
+async def ask(request: Request, req: AskRequest):
     if not req.question.strip():
         raise HTTPException(400, "Question cannot be empty")
     if len(req.question) > 500:

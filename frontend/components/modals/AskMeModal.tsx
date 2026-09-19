@@ -4,11 +4,13 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { askKamal, getSuggestions } from '@/lib/api'
 import { speak, stopSpeaking } from '@/lib/voice'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Props { open: boolean; onClose: () => void }
 interface Message { role: 'user' | 'kamal'; text: string }
 
 export default function AskMeModal({ open, onClose }: Props) {
+  const { lang } = useLanguage()
   const [messages,    setMessages]    = useState<Message[]>([])
   const [input,       setInput]       = useState('')
   const [loading,     setLoading]     = useState(false)
@@ -40,7 +42,7 @@ export default function AskMeModal({ open, onClose }: Props) {
     try {
       const data = await askKamal(question)
       setMessages(m => [...m, { role: 'kamal', text: data.answer }])
-      if (voiceOn) speak(data.answer)
+      if (voiceOn) speak(data.answer, { lang })
     } catch {
       setMessages(m => [...m, { role: 'kamal', text: "Sorry, having trouble connecting. Please try again." }])
     }
