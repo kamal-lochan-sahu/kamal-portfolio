@@ -31,12 +31,12 @@ export default function Journey() {
         </h2>
       </motion.div>
 
-      <div style={{
+      <div className="journey-timeline" style={{
         position: 'relative', maxWidth: 760, width: '100%', margin: '0 auto',
         maxHeight: 'calc(100vh - 240px)', overflowY: 'auto', paddingRight: 8,
       }}>
         {/* Center line */}
-        <div style={{
+        <div className="timeline-line" style={{
           position: 'absolute', left: '50%', top: 0, bottom: 0,
           width: 2, background: 'linear-gradient(to bottom, transparent, #1A2235 10%, #1A2235 90%, transparent)',
           transform: 'translateX(-50%)', zIndex: 0,
@@ -47,6 +47,7 @@ export default function Journey() {
           return (
           <motion.div
             key={i}
+            className="timeline-item"
             initial={{ opacity: 0, x: m.side === 'left' ? -30 : 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: i * 0.06 }}
@@ -61,7 +62,7 @@ export default function Journey() {
             }}
           >
             {/* Dot */}
-            <div style={{
+            <div className="timeline-dot" style={{
               position: 'absolute', left: '50%', top: '50%',
               transform: 'translate(-50%, -50%)',
               width: 12, height: 12, borderRadius: '50%',

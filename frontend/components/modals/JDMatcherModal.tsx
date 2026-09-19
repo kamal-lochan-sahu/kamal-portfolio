@@ -60,6 +60,7 @@ export default function JDMatcherModal({ open, onClose }: Props) {
           exit={{ opacity: 0,    scale: 0.94, y: 20 }}
           transition={{ duration: 0.25 }}
           onClick={e => e.stopPropagation()}
+          className="ai-modal"
           style={{
             width: '100%', maxWidth: 680,
             maxHeight: '85vh',

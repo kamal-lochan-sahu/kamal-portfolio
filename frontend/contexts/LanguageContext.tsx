@@ -62,6 +62,7 @@ const translations = {
     statFollowers: 'Followers',
     statFollowing: 'Following',
     loadingGithub: 'Loading GitHub data...',
+    githubError: "Couldn't load GitHub data right now — check back later.",
 
     // Contact
     contactEyebrow: '— CONTACT —',
@@ -129,6 +130,7 @@ const translations = {
     statFollowers: 'Follower',
     statFollowing: 'Folge ich',
     loadingGithub: 'GitHub-Daten werden geladen...',
+    githubError: 'GitHub-Daten konnten gerade nicht geladen werden — später erneut versuchen.',
 
     // Contact
     contactEyebrow: '— KONTAKT —',

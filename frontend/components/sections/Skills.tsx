@@ -166,6 +166,7 @@ export default function Skills() {
 
       <canvas
         ref={canvasRef}
+        className="skills-wall-canvas"
         style={{ width: '100%', flex: 1, minHeight: 0, display: 'block' }}
       />
 

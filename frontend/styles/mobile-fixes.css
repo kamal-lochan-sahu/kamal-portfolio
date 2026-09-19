@@ -13,6 +13,11 @@
     line-height: 1.15 !important;
   }
 
+  /* Hero: stack text above the robot avatar instead of side-by-side */
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+
   /* Stack skills wall / physics canvas to full width, shorter height */
   .skills-wall-canvas {
     height: 320px !important;
@@ -30,60 +35,52 @@
     transform: none !important;
   }
 
-  /* Custom cursor: hide on touch devices, browsers show native cursor anyway */
-  .custom-cursor,
-  .custom-cursor-ring {
-    display: none !important;
-  }
-
-  /* Avatar companion: shrink and move to avoid overlapping content */
+  /* Avatar companion robot: shrink on small screens */
   .avatar-companion {
-    width: 48px !important;
-    height: 48px !important;
-    bottom: 12px !important;
-    right: 12px !important;
+    width: 56px !important;
+    height: 56px !important;
   }
 
-  /* Modals: full-width sheets instead of centered boxes */
+  /* AI modals: full-width sheets instead of centered boxes */
   .ai-modal {
     width: 100vw !important;
     max-width: 100vw !important;
     height: 100vh !important;
     max-height: 100vh !important;
     border-radius: 0 !important;
-    top: 0 !important;
-    left: 0 !important;
-    transform: none !important;
   }
 
-  /* Timeline: switch from side-by-side to single column */
-  .journey-timeline {
-    flex-direction: column !important;
+  /* About: bio+certs and highlight stats collapse to single/double column */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
   }
-  .journey-timeline .timeline-item {
-    width: 100% !important;
-    padding-left: 24px !important;
-  }
-
-  /* Guided tour card: keep inset from edges on small screens */
-  .tour-card {
-    width: calc(100vw - 24px) !important;
-    left: 12px !important;
-    right: 12px !important;
-    transform: none !important;
+  .about-highlights-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 
-  /* Sound + language toggles: shrink and reposition to avoid stacking */
-  .sound-toggle {
-    bottom: 12px !important;
-    left: 12px !important;
-    width: 36px !important;
-    height: 36px !important;
+  /* Journey timeline: collapse the alternating left/right layout into a
+     single left-aligned column, with the line and dots moved to the edge */
+  .timeline-item {
+    justify-content: flex-start !important;
+    padding-left: 32px !important;
+    padding-right: 0 !important;
   }
+  .timeline-line {
+    left: 16px !important;
+  }
+  .timeline-dot {
+    left: 16px !important;
+  }
+
+  /* Navbar language/sound buttons: slightly tighter on small screens */
   .language-toggle {
-    top: 12px !important;
-    right: 12px !important;
-    padding: 4px 10px !important;
+    padding: 5px 8px !important;
+    font-size: 10px !important;
+  }
+  .sound-toggle {
+    width: 30px !important;
+    height: 30px !important;
   }
 }
 
@@ -95,5 +92,11 @@
   section {
     padding-left: 16px !important;
     padding-right: 16px !important;
+  }
+
+  /* Highlight stats: 2x2 is still tight below 400px, drop to single column */
+  .about-highlights-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
   }
 }

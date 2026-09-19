@@ -27,6 +27,7 @@ export default function Github() {
   const [user,  setUser]  = useState<GHUser | null>(null)
   const [repos, setRepos] = useState<GHRepo[]>([])
   const [loading, setLoading] = useState(true)
+  const [error,   setError]   = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,8 +35,9 @@ export default function Github() {
         const data = await getGithubStats()
         setUser(data.user)
         setRepos(data.repos || [])
-      } catch { /* offline graceful */ }
-      finally { setLoading(false) }
+      } catch {
+        setError(true)
+      } finally { setLoading(false) }
     }
     fetchData()
   }, [])
@@ -141,6 +143,12 @@ export default function Github() {
         {loading && (
           <div style={{ textAlign: 'center', fontFamily: 'var(--jb)', fontSize: 13, color: '#8892B0' }}>
             {t('loadingGithub')}
+          </div>
+        )}
+
+        {!loading && error && (
+          <div style={{ textAlign: 'center', fontFamily: 'var(--jb)', fontSize: 13, color: '#8892B0', padding: '12px 0' }}>
+            {t('githubError')}
           </div>
         )}
       </div>

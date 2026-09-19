@@ -72,6 +72,7 @@ export default function AskMeModal({ open, onClose }: Props) {
           exit={{ opacity:0,    scale:0.93, y:20 }}
           transition={{ duration:0.25, type:'spring', stiffness:300 }}
           onClick={e => e.stopPropagation()}
+          className="ai-modal"
           style={{
             width:'100%', maxWidth:680, height:'80vh', maxHeight:620,
             background:'rgba(15,22,36,0.97)',

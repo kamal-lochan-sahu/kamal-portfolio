@@ -26,7 +26,7 @@ export default function About() {
   ]
   return (
     <section id="about" className="snap-sec" style={{ padding: '80px 24px 24px' }}>
-      <div style={{ maxWidth: 1000, width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
+      <div className="about-grid" style={{ maxWidth: 1000, width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
 
         {/* LEFT — Bio */}
         <motion.div
@@ -48,7 +48,7 @@ export default function About() {
           </p>
 
           {/* Highlights */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
+          <div className="about-highlights-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
             {HIGHLIGHTS.map(h => (
               <div key={h.label} style={{ textAlign: 'center', padding: '12px 8px', background: '#0F1624', borderRadius: 10, border: '1px solid #1A2235' }}>
                 <div style={{ fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '1.4rem', color: '#00E5FF' }}>{h.label}</div>

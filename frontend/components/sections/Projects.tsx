@@ -44,7 +44,7 @@ export default function Projects() {
         </h2>
       </motion.div>
 
-      <div style={{ display:'flex', gap:8, justifyContent:'center', marginBottom:28 }}>
+      <div className="project-tabs" style={{ display:'flex', gap:8, justifyContent:'center', marginBottom:28 }}>
         {TAB_KEYS.map(tb => (
           <motion.button key={tb.key} onClick={()=>setTab(tb.key)}
             whileHover={{ scale:1.04 }} whileTap={{ scale:0.97 }}
@@ -80,7 +80,7 @@ export default function Projects() {
                 transition={{delay:i*0.08}}>
                 <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8} glareEnable={true}
                   glareMaxOpacity={0.08} glareColor="#00E5FF"
-                  style={{ height:'100%' }}>
+                  className="tilt-card" style={{ height:'100%' }}>
                   <div style={{
                     background:'rgba(15,22,36,0.85)',
                     border:'1px solid rgba(26,34,53,0.9)',

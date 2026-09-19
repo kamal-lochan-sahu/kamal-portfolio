@@ -1,6 +1,6 @@
 
 'use client'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SVGRobot from './SVGRobot'
 import AskMeModal     from '@/components/modals/AskMeModal'
@@ -10,10 +10,37 @@ export default function AvatarCompanion() {
   const [hovered, setHovered] = useState(false)
   const [askOpen, setAskOpen] = useState(false)
   const [jdOpen,  setJdOpen]  = useState(false)
+  const [isTouch, setIsTouch] = useState(false)
+  const wrapRef = useRef<HTMLDivElement>(null)
+
+  // Touch devices don't get reliable hover — use tap-to-toggle instead.
+  // Devices with a real mouse keep the hover-to-open behavior.
+  useEffect(() => {
+    const mq = window.matchMedia('(pointer: coarse)')
+    setIsTouch(mq.matches)
+    const onChange = (e: MediaQueryListEvent) => setIsTouch(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  // Tap-outside closes the menu on touch devices (no hover-leave to rely on)
+  useEffect(() => {
+    if (!hovered || !isTouch) return
+    const onOutside = (e: PointerEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        setHovered(false)
+      }
+    }
+    document.addEventListener('pointerdown', onOutside)
+    return () => document.removeEventListener('pointerdown', onOutside)
+  }, [hovered, isTouch])
 
   return (
     <>
-      <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}
+      <div
+        ref={wrapRef}
+        onMouseEnter={() => { if (!isTouch) setHovered(true) }}
+        onMouseLeave={() => { if (!isTouch) setHovered(false) }}
         style={{
           position:'fixed', bottom:20, right:20, zIndex:50,
           display:'flex', flexDirection:'column', alignItems:'flex-end', gap:8, padding:8,
@@ -48,6 +75,8 @@ export default function AvatarCompanion() {
 
         {/* Robot */}
         <motion.div
+          className="avatar-companion"
+          onClick={() => { if (isTouch) setHovered(h => !h) }}
           whileHover={{ scale:1.06 }}
           style={{
             width:80, height:80, borderRadius:'50%', overflow:'hidden',

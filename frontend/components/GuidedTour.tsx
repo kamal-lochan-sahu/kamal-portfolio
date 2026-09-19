@@ -10,7 +10,7 @@ interface TourStep {
 
 const TOUR_STEPS: TourStep[] = [
   { id: 'hero', title: 'Welcome', message: "Hey, I'm Kamal's assistant. Let me show you around." },
-  { id: 'skills', title: 'Skills', message: 'Here is the physics-based skills wall — drag the nodes around.' },
+  { id: 'skills', title: 'Skills', message: 'Here is the physics-based skills wall — move your cursor over it to watch the nodes react.' },
   { id: 'projects', title: 'Projects', message: 'These are the flagship builds — NEXUS and CORTEX lead the pack.' },
   { id: 'journey', title: 'Journey', message: "This timeline traces Kamal's path toward Robotics AI in Germany." },
   { id: 'about', title: 'About', message: 'A bit more about who Kamal is and how he works.' },
@@ -82,6 +82,7 @@ export default function GuidedTour() {
 
       {active && current && (
         <div
+          className="tour-card"
           style={{
             position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)',
             zIndex: 9998, width: 'min(420px, 90vw)',

@@ -33,7 +33,7 @@ export default function Hero() {
         filter:'blur(60px)', pointerEvents:'none', zIndex:0,
       }}/>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-16"
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-16 hero-grid"
         style={{ display:'grid', gridTemplateColumns:'1fr auto', gap:40, alignItems:'center' }}>
 
         {/* LEFT */}
@@ -45,7 +45,7 @@ export default function Hero() {
             {t('heroGreeting')}
           </motion.p>
 
-          <motion.h1 {...up(0.35)} style={{
+          <motion.h1 className="hero-heading" {...up(0.35)} style={{
             fontFamily:'var(--sg)', fontWeight:900, lineHeight:1.02,
             fontSize:'clamp(3.2rem,5.5vw,5.8rem)', marginBottom:20,
           }}>

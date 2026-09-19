@@ -95,6 +95,7 @@ export default function Navbar() {
         style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 8 }}
       >
         <button
+          className="language-toggle"
           onClick={() => {
             setLang(lang === 'en' ? 'de' : 'en')
             playSound('click')
@@ -110,6 +111,7 @@ export default function Navbar() {
           {lang === 'en' ? '🇬🇧 EN' : '🇩🇪 DE'}
         </button>
         <button
+          className="sound-toggle"
           onClick={() => {
             const nowMuted = toggleMute()
             setSound(!nowMuted)
