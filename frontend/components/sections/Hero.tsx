@@ -73,20 +73,52 @@ export default function Hero() {
           }}>{t('heroSubLine')}</motion.p>
 
           <motion.div {...up(0.7)} style={{ display:'flex', flexWrap:'wrap', gap:10, marginBottom:44 }}>
-            {STATS.map((s,i) => (
-              <motion.div key={i} whileHover={{ scale:1.05, borderColor:'rgba(0,229,255,0.5)' }}
-                style={{
-                  display:'flex', alignItems:'center', gap:8,
-                  padding:'9px 20px',
-                  background:'rgba(15,22,36,0.8)',
-                  border:'1px solid rgba(26,34,53,0.9)',
-                  borderRadius:999, backdropFilter:'blur(10px)',
-                  cursor:'none', transition:'all 0.25s',
-                }}>
-                <span style={{ fontFamily:'var(--sg)', fontWeight:800, color:'#00E5FF', fontSize:15 }}>{s.value}</span>
-                <span style={{ fontFamily:'var(--jb)', fontSize:11, color:'#8892B0' }}>{s.label}</span>
-              </motion.div>
-            ))}
+            {STATS.map((s,i) => {
+              const badgeStyle = {
+                display:'flex', alignItems:'center', gap:8,
+                padding:'9px 20px',
+                background:'rgba(15,22,36,0.8)',
+                border:'1px solid rgba(26,34,53,0.9)',
+                borderRadius:999, backdropFilter:'blur(10px)',
+                cursor:'none', transition:'all 0.25s',
+                textDecoration:'none',
+              } as const
+              const inner = (
+                <>
+                  <span style={{ fontFamily:'var(--sg)', fontWeight:800, color:'#00E5FF', fontSize:15 }}>{s.value}</span>
+                  <span style={{ fontFamily:'var(--jb)', fontSize:11, color:'#8892B0' }}>{s.label}</span>
+                </>
+              )
+              if (s.href) {
+                if (s.external) {
+                  return (
+                    <motion.a
+                      key={i} href={s.href} target="_blank" rel="noreferrer"
+                      whileHover={{ scale:1.05, borderColor:'rgba(0,229,255,0.5)' }}
+                      style={badgeStyle}
+                    >
+                      {inner}
+                    </motion.a>
+                  )
+                }
+                return (
+                  <motion.a
+                    key={i}
+                    onClick={(e) => { e.preventDefault(); scrollTo(s.href!.replace('#','')) }}
+                    href={s.href}
+                    whileHover={{ scale:1.05, borderColor:'rgba(0,229,255,0.5)' }}
+                    style={badgeStyle}
+                  >
+                    {inner}
+                  </motion.a>
+                )
+              }
+              return (
+                <motion.div key={i} whileHover={{ scale:1.05, borderColor:'rgba(0,229,255,0.5)' }} style={badgeStyle}>
+                  {inner}
+                </motion.div>
+              )
+            })}
           </motion.div>
 
           <motion.div {...up(0.85)} style={{ display:'flex', gap:18, flexWrap:'wrap' }}>

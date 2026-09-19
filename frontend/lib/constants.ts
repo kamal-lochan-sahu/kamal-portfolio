@@ -9,10 +9,10 @@ export const SECTIONS = [
 ]
 
 export const STATS = [
-  { value: '10+',  label: 'Production Systems' },
+  { value: '10+',  label: 'Production Systems', href: '#projects' },
   { value: 'AWS',  label: 'Cloud Certified'    },
   { value: 'C1',   label: '🇩🇪 German'          },
-  { value: '500+', label: 'Connections'         },
+  { value: '500+', label: 'Connections', href: 'https://www.linkedin.com/in/kamallochansahu', external: true },
 ]
 
 export const TAGLINE  = "I build systems that think, predict, and act."
