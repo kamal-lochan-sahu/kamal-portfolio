@@ -4,18 +4,21 @@ import { motion } from 'framer-motion'
 import { STATS, EMAIL } from '@/lib/constants'
 import MagneticButton  from '@/components/ui/MagneticButton'
 import ParticleBackground from '@/components/ui/ParticleBackground'
-import SVGRobot from '@/components/avatar/SVGRobot'
-import { useLanguage } from '@/contexts/LanguageContext'
 
 const up = (d: number) => ({
   initial:{ opacity:0, y:32 }, animate:{ opacity:1, y:0 },
   transition:{ duration:0.8, delay:d, ease:[0.22,1,0.36,1] as const },
 })
 
+const CHIPS = ['Business systems', 'AI & automation', 'Web & mobile apps']
+
 export default function Hero() {
-  const { t } = useLanguage()
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior:'smooth' })
+
+  const openAskAI = () => {
+    window.dispatchEvent(new CustomEvent('open-ask-ai'))
+  }
 
   return (
     <section id="hero" className="snap-sec" style={{ alignItems:'center' }}>
@@ -33,134 +36,100 @@ export default function Hero() {
         filter:'blur(60px)', pointerEvents:'none', zIndex:0,
       }}/>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-16 hero-grid"
-        style={{ display:'grid', gridTemplateColumns:'1fr auto', gap:40, alignItems:'center' }}>
+      <div className="relative z-10 w-full max-w-3xl mx-auto px-6 pt-16">
 
-        {/* LEFT */}
-        <div>
-          <motion.p {...up(0.2)} style={{
-            fontFamily:'var(--jb)', color:'#00E5FF', fontSize:12,
-            letterSpacing:'0.28em', marginBottom:22,
-          }}>
-            {t('heroGreeting')}
-          </motion.p>
+        <motion.p {...up(0.2)} style={{
+          fontFamily:'var(--jb)', color:'#00E5FF', fontSize:12,
+          letterSpacing:'0.28em', marginBottom:22,
+        }}>
+          {'>_ Hello,'}
+        </motion.p>
 
-          <motion.h1 className="hero-heading" {...up(0.35)} style={{
-            fontFamily:'var(--sg)', fontWeight:900, lineHeight:1.02,
-            fontSize:'clamp(3.2rem,5.5vw,5.8rem)', marginBottom:20,
-          }}>
-            Kamal<br/>Lochan{' '}
-            <span style={{
-              background:'linear-gradient(135deg,#00E5FF,#7B61FF)',
-              WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent',
-            }}>Sahu</span>
-          </motion.h1>
+        <motion.h1 className="hero-heading" {...up(0.35)} style={{
+          fontFamily:'var(--sg)', fontWeight:900, lineHeight:1.02,
+          fontSize:'clamp(2.6rem,5.5vw,4.6rem)', marginBottom:20,
+        }}>
+          I&apos;m Kamal{' '}
+          <span style={{
+            background:'linear-gradient(135deg,#00E5FF,#7B61FF)',
+            WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent',
+          }}>Lochan Sahu</span>
+        </motion.h1>
 
-          <motion.p {...up(0.5)} style={{
-            fontFamily:'var(--sg)', fontSize:'clamp(1rem,1.8vw,1.25rem)',
-            color:'rgba(245,245,245,0.7)', lineHeight:1.75, marginBottom:12,
-          }}>
-            {t('heroLead')}{' '}
-            <span style={{ color:'#00E5FF', fontWeight:700, textShadow:'0 0 20px #00E5FF66' }}>{t('heroThink')}</span>,{' '}
-            <span style={{ color:'#7B61FF', fontWeight:700, textShadow:'0 0 20px #7B61FF66' }}>{t('heroPredict')}</span>,{' '}
-            <span style={{ color:'#00E5FF', fontWeight:700, textShadow:'0 0 20px #00E5FF66' }}>{t('heroAct')}</span>
-            {' '}<span style={{ color:'rgba(245,245,245,0.35)' }}>{t('heroTail')}</span>
-          </motion.p>
+        <motion.p {...up(0.45)} style={{
+          fontFamily:'var(--sg)', fontSize:'clamp(1rem,1.8vw,1.2rem)',
+          color:'#00E5FF', fontWeight:600, marginBottom:14,
+        }}>
+          Full-Stack &amp; ML/AI Engineer — Business Software, Automation &amp; Intelligent Systems
+        </motion.p>
 
-          <motion.p {...up(0.6)} style={{
-            fontFamily:'var(--jb)', fontSize:12, color:'#8892B0',
-            letterSpacing:'0.09em', marginBottom:36,
-          }}>{t('heroSubLine')}</motion.p>
+        <motion.p {...up(0.55)} style={{
+          fontFamily:'var(--sg)', fontSize:'clamp(1rem,1.6vw,1.15rem)',
+          color:'rgba(245,245,245,0.7)', lineHeight:1.75, marginBottom:24, maxWidth:560,
+        }}>
+          I build custom software and automation that cut manual work and keep your business running smoothly.
+        </motion.p>
 
-          <motion.div {...up(0.7)} style={{ display:'flex', flexWrap:'wrap', gap:10, marginBottom:44 }}>
-            {STATS.map((s,i) => {
-              const badgeStyle = {
-                display:'flex', alignItems:'center', gap:8,
-                padding:'9px 20px',
-                background:'rgba(15,22,36,0.8)',
-                border:'1px solid rgba(26,34,53,0.9)',
-                borderRadius:999, backdropFilter:'blur(10px)',
-                cursor:'none', transition:'all 0.25s',
-                textDecoration:'none',
-              } as const
-              const inner = (
-                <>
-                  <span style={{ fontFamily:'var(--sg)', fontWeight:800, color:'#00E5FF', fontSize:15 }}>{s.value}</span>
-                  <span style={{ fontFamily:'var(--jb)', fontSize:11, color:'#8892B0' }}>{s.label}</span>
-                </>
-              )
-              if (s.href) {
-                if (s.external) {
-                  return (
-                    <motion.a
-                      key={i} href={s.href} target="_blank" rel="noreferrer"
-                      whileHover={{ scale:1.05, borderColor:'rgba(0,229,255,0.5)' }}
-                      style={badgeStyle}
-                    >
-                      {inner}
-                    </motion.a>
-                  )
-                }
-                return (
-                  <motion.a
-                    key={i}
-                    onClick={(e) => { e.preventDefault(); scrollTo(s.href!.replace('#','')) }}
-                    href={s.href}
-                    whileHover={{ scale:1.05, borderColor:'rgba(0,229,255,0.5)' }}
-                    style={badgeStyle}
-                  >
-                    {inner}
-                  </motion.a>
-                )
-              }
+        <motion.div {...up(0.65)} style={{ display:'flex', flexWrap:'wrap', gap:8, marginBottom:36 }}>
+          {CHIPS.map(c => (
+            <span key={c} style={{
+              padding:'6px 14px', borderRadius:999,
+              border:'1px solid rgba(0,229,255,0.25)', background:'rgba(0,229,255,0.05)',
+              fontFamily:'var(--jb)', fontSize:12, color:'#00E5FF',
+            }}>{c}</span>
+          ))}
+        </motion.div>
+
+        <motion.div {...up(0.75)} style={{ display:'flex', gap:14, flexWrap:'wrap', marginBottom:40 }}>
+          <MagneticButton variant="primary" onClick={openAskAI}>
+            Tell me your problem →
+          </MagneticButton>
+          <MagneticButton variant="outline" onClick={() => scrollTo('projects')}>
+            See what I&apos;ve built ↓
+          </MagneticButton>
+          <MagneticButton variant="outline" href={`mailto:${EMAIL}`}>
+            Email me
+          </MagneticButton>
+        </motion.div>
+
+        <motion.div {...up(0.85)} style={{ display:'flex', flexWrap:'wrap', gap:10 }}>
+          {STATS.map((s,i) => {
+            const badgeStyle = {
+              display:'flex', alignItems:'center', gap:8,
+              padding:'9px 20px',
+              background:'rgba(15,22,36,0.8)',
+              border:'1px solid rgba(26,34,53,0.9)',
+              borderRadius:999, backdropFilter:'blur(10px)',
+              cursor:'none', transition:'all 0.25s',
+              textDecoration:'none',
+            } as const
+            const inner = (
+              <>
+                <span style={{ fontFamily:'var(--sg)', fontWeight:800, color:'#00E5FF', fontSize:15 }}>{s.value}</span>
+                <span style={{ fontFamily:'var(--jb)', fontSize:11, color:'#8892B0' }}>{s.label}</span>
+              </>
+            )
+            if (s.href) {
               return (
-                <motion.div key={i} whileHover={{ scale:1.05, borderColor:'rgba(0,229,255,0.5)' }} style={badgeStyle}>
+                <motion.a
+                  key={i}
+                  onClick={(e) => { e.preventDefault(); scrollTo(s.href!.replace('#','')) }}
+                  href={s.href}
+                  whileHover={{ scale:1.05, borderColor:'rgba(0,229,255,0.5)' }}
+                  style={badgeStyle}
+                >
                   {inner}
-                </motion.div>
+                </motion.a>
               )
-            })}
-          </motion.div>
-
-          <motion.div {...up(0.85)} style={{ display:'flex', gap:18, flexWrap:'wrap' }}>
-            <MagneticButton variant="primary" onClick={() => scrollTo('skills')}>
-              {t('viewWork')}
-            </MagneticButton>
-            <MagneticButton variant="outline" href={`mailto:${EMAIL}`}>
-              {t('hireMe')}
-            </MagneticButton>
-          </motion.div>
-        </div>
-
-        {/* RIGHT — Robot */}
-        <motion.div
-          initial={{ opacity:0, x:40, scale:0.9 }}
-          animate={{ opacity:1, x:0,  scale:1 }}
-          transition={{ duration:1.1, delay:0.5, ease:[0.22,1,0.36,1] }}
-          className="hidden lg:flex items-center justify-center"
-          style={{ minWidth:220 }}
-        >
-          <SVGRobot emotion="idle" size={200} showFull={true} />
+            }
+            return (
+              <motion.div key={i} whileHover={{ scale:1.05, borderColor:'rgba(0,229,255,0.5)' }} style={badgeStyle}>
+                {inner}
+              </motion.div>
+            )
+          })}
         </motion.div>
       </div>
-
-      {/* Currently building */}
-      <motion.div
-        initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} transition={{ delay:1.5 }}
-        style={{
-          position:'absolute', bottom:32, left:'50%', transform:'translateX(-50%)',
-          display:'flex', alignItems:'center', gap:10,
-          padding:'10px 24px',
-          background:'rgba(15,22,36,0.9)',
-          border:'1px solid rgba(26,34,53,0.8)',
-          borderRadius:999, backdropFilter:'blur(14px)', whiteSpace:'nowrap',
-        }}
-      >
-        <span style={{ width:8, height:8, borderRadius:'50%', background:'#00C853',
-          display:'inline-block', boxShadow:'0 0 8px #00C853', animation:'pulse 2s infinite' }}/>
-        <span style={{ fontFamily:'var(--jb)', fontSize:12, color:'#8892B0' }}>{t('currentlyBuilding')}</span>
-        <span style={{ fontFamily:'var(--jb)', fontSize:12, fontWeight:700, color:'#00C853' }}>CORTEX</span>
-        <span style={{ fontFamily:'var(--jb)', fontSize:12, color:'rgba(136,146,176,0.45)' }}>{t('currentlyBuildingDesc')}</span>
-      </motion.div>
     </section>
   )
 }

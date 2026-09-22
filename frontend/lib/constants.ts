@@ -9,10 +9,9 @@ export const SECTIONS = [
 ]
 
 export const STATS = [
-  { value: '10+',  label: 'Production Systems', href: '#projects' },
+  { value: '8',    label: 'Business Systems', href: '#projects' },
+  { value: '7',    label: 'Open-Source AI/ML' },
   { value: 'AWS',  label: 'Cloud Certified'    },
-  { value: 'C1',   label: '🇩🇪 German'          },
-  { value: '500+', label: 'Connections', href: 'https://www.linkedin.com/in/kamallochansahu', external: true },
 ]
 
 export const TAGLINE  = "I build systems that think, predict, and act."
@@ -24,7 +23,7 @@ export const LINKEDIN = "https://www.linkedin.com/in/kamallochansahu"
 export const SKILLS: Record<string, string[]> = {
   'AI / ML':    ['Python','Machine Learning','PyTorch','TensorFlow','Scikit-Learn','NumPy','Pandas','LightGBM','XGBoost','Prophet','MLOps'],
   'Robotics':   ['ROS2','Gazebo','MediaPipe','YOLOv8','CLIP','Reinforcement Learning','CrewAI'],
-  'Backend':    ['FastAPI','Node.js','Flask','REST APIs','PostgreSQL','Redis','Docker','SQL'],
+  'Backend':    ['FastAPI','Node.js','Express','Flask','REST APIs','PostgreSQL','MongoDB','Redis','Docker','SQL'],
   'Frontend':   ['React.js','Next.js','TypeScript','JavaScript','Tailwind CSS','Framer Motion','D3.js','Three.js'],
   'Cloud':      ['AWS','Git','DevOps','Systems Design','Computer Networks'],
 }
@@ -47,7 +46,7 @@ export const PROJECTS = [
     desc: '6 autonomous agents continuously monitor, predict, optimize, secure, supply and report — zero human intervention.',
   },
   {
-    id: 'biosignal', title: 'BioSignal', tier: 2, status: 'live',
+    id: 'biosignal', title: 'BioSignal', tier: 2, status: 'opensource',
     subtitle: 'ICU Patient Deterioration Prediction',
     tagline: 'Six hours earlier. The difference between life and death.',
     tags: ['LightGBM','SHAP','MIMIC-IV','FastAPI','Next.js','D3.js'],
@@ -63,7 +62,7 @@ export const PROJECTS = [
     desc: 'Live EU energy platform — real ENTSO-E data, 24hr ML forecasting, anomaly detection, CO2 tracking.',
   },
   {
-    id: 'earthwatch', title: 'EarthWatch', tier: 2, status: 'live',
+    id: 'earthwatch', title: 'EarthWatch', tier: 2, status: 'opensource',
     subtitle: 'Climate Anomaly Detection',
     tagline: 'The planet is sending signals. EarthWatch is listening.',
     tags: ['Isolation Forest','NASA API','NOAA','Globe.gl','FastAPI','D3.js'],
@@ -71,7 +70,7 @@ export const PROJECTS = [
     desc: '3D globe climate intelligence — live NASA/NOAA data, ML anomaly detection, 50+ year trend analysis.',
   },
   {
-    id: 'truthlens', title: 'TruthLens', tier: 2, status: 'live',
+    id: 'truthlens', title: 'TruthLens', tier: 2, status: 'opensource',
     subtitle: 'Multimodal Misinformation Detection',
     tagline: 'Fake news hides in text AND images. TruthLens sees both.',
     tags: ['RoBERTa','CLIP','BeautifulSoup','FastAPI','Next.js','NewsAPI'],

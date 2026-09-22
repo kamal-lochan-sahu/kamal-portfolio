@@ -12,7 +12,7 @@ const TOUR_STEPS: TourStep[] = [
   { id: 'hero', title: 'Welcome', message: "Hey, I'm Kamal's assistant. Let me show you around." },
   { id: 'skills', title: 'Skills', message: 'Here is the physics-based skills wall — move your cursor over it to watch the nodes react.' },
   { id: 'projects', title: 'Projects', message: 'These are the flagship builds — NEXUS and CORTEX lead the pack.' },
-  { id: 'journey', title: 'Journey', message: "This timeline traces Kamal's path toward Robotics AI in Germany." },
+  { id: 'journey', title: 'Journey', message: "This timeline traces Kamal's path from self-taught beginnings to freelance work today." },
   { id: 'about', title: 'About', message: 'A bit more about who Kamal is and how he works.' },
   { id: 'github', title: 'GitHub Activity', message: 'Live contribution activity, pulled straight from GitHub.' },
   { id: 'contact', title: 'Contact', message: "That's the tour! Feel free to reach out from here." },

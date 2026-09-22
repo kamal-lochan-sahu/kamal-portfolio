@@ -4,8 +4,8 @@ import { playSound } from '@/lib/sounds';
 
 const COMMANDS: Record<string, string> = {
   help: 'Available: help, whoami, skills, projects, contact, sudo, clear, exit',
-  whoami: 'Kamal Lochan Sahu — Full-Stack Dev -> Robotics AI Engineer (Germany track)',
-  skills: 'React . Node.js . Python/ML . AWS . FastAPI . C1 German',
+  whoami: 'Kamal Lochan Sahu — Full-Stack & ML/AI Engineer (Business Software, Automation, AI)',
+  skills: 'React . Node.js . Python/ML . AWS . FastAPI . MongoDB',
   projects: 'NEXUS . CORTEX . BioSignal . GridSense . EarthWatch . TruthLens . CropSense',
   contact: 'Scroll to the Contact section, or type: open contact',
   sudo: 'Nice try. Permission denied: you are not root here.',

@@ -4,21 +4,20 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
 import { PROJECTS } from '@/lib/constants'
-import { useLanguage } from '@/contexts/LanguageContext'
 
 const TAB_KEYS = [
-  { key:'flagship',   tKey:'tabFlagship'   as const, filter:(p:typeof PROJECTS[0])=>p.tier===1 },
-  { key:'ai',         tKey:'tabAI'         as const, filter:(p:typeof PROJECTS[0])=>p.tier===2 },
-  { key:'production', tKey:'tabProduction' as const, filter:(p:typeof PROJECTS[0])=>p.tier===3 },
+  { key:'flagship',   label:'⭐ Flagship',   filter:(p:typeof PROJECTS[0])=>p.tier===1 },
+  { key:'ai',         label:'🧠 AI Systems', filter:(p:typeof PROJECTS[0])=>p.tier===2 },
+  { key:'production', label:'💼 Production', filter:(p:typeof PROJECTS[0])=>p.tier===3 },
 ]
 const STATUS: Record<string,{bg:string;color:string;label:string}> = {
   live: { bg:'rgba(0,200,83,0.1)',   color:'#00C853', label:'🟢 Live'  },
   demo: { bg:'rgba(123,97,255,0.1)', color:'#7B61FF', label:'🎬 Demo'  },
   soon: { bg:'rgba(255,165,0,0.1)',  color:'#FFA500', label:'🔄 Soon'  },
+  opensource: { bg:'rgba(0,229,255,0.1)', color:'#00E5FF', label:'⚡ Open-source' },
 }
 
 export default function Projects() {
-  const { t, tProjectTagline } = useLanguage()
   const [tab, setTab] = useState('flagship')
   const shown = PROJECTS.filter(TAB_KEYS.find(x=>x.key===tab)!.filter)
 
@@ -37,10 +36,10 @@ export default function Projects() {
         transition={{duration:0.6}} viewport={{once:true}}
         style={{ textAlign:'center', marginBottom:28 }}>
         <p style={{ fontFamily:'var(--jb)', color:'#7B61FF', fontSize:12, letterSpacing:'0.22em', marginBottom:8 }}>
-          {t('projectsEyebrow')}
+          — PROJECTS —
         </p>
         <h2 style={{ fontFamily:'var(--sg)', fontWeight:900, fontSize:'3rem', color:'#F5F5F5' }}>
-          {t('projectsHeading')}
+          My Work
         </h2>
       </motion.div>
 
@@ -57,7 +56,7 @@ export default function Projects() {
               color: tab===tb.key?'#00E5FF':'#8892B0',
               transition:'all 0.2s',
             }}>
-            {t(tb.tKey)}
+            {tb.label}
           </motion.button>
         ))}
       </div>
@@ -103,7 +102,7 @@ export default function Projects() {
                       <div>
                         <h3 style={{ fontFamily:'var(--sg)', fontWeight:800, fontSize:'1.3rem', color:'#F5F5F5', marginBottom:3 }}>
                           {p.title}
-                          {p.tier===1 && <span style={{ marginLeft:8, fontSize:11, color:'#00E5FF', fontFamily:'var(--jb)' }}>{t('flagshipBadge')}</span>}
+                          {p.tier===1 && <span style={{ marginLeft:8, fontSize:11, color:'#00E5FF', fontFamily:'var(--jb)' }}>★ FLAGSHIP</span>}
                         </h3>
                         <p style={{ fontFamily:'var(--jb)', fontSize:12, color:'#8892B0' }}>{p.subtitle}</p>
                       </div>
@@ -119,7 +118,7 @@ export default function Projects() {
                       fontFamily:'var(--sg)', fontSize:13,
                       color:'rgba(245,245,245,0.5)', fontStyle:'italic', lineHeight:1.55,
                     }}>
-                      &ldquo;{tProjectTagline(p.id, p.tagline)}&rdquo;
+                      &ldquo;{p.tagline}&rdquo;
                     </p>
 
                     <div style={{ display:'flex', alignItems:'center', gap:8 }}>
@@ -149,7 +148,7 @@ export default function Projects() {
                         }}
                           onMouseEnter={e=>{ (e.currentTarget as HTMLElement).style.borderColor='#00E5FF';(e.currentTarget as HTMLElement).style.color='#00E5FF' }}
                           onMouseLeave={e=>{ (e.currentTarget as HTMLElement).style.borderColor='#1A2235';(e.currentTarget as HTMLElement).style.color='#8892B0' }}
-                        >{t('githubBtn')}</a>
+                        >GitHub →</a>
                       )}
                       {p.demo!=='#' ? (
                         <a href={p.demo} target="_blank" rel="noreferrer" style={{
@@ -158,13 +157,13 @@ export default function Projects() {
                           border:'1px solid rgba(0,229,255,0.3)', borderRadius:10,
                           fontFamily:'var(--jb)', fontSize:12, color:'#00E5FF',
                           textDecoration:'none',
-                        }}>{t('liveDemo')}</a>
+                        }}>Live Demo ↗</a>
                       ) : (
                         <span style={{
                           flex:1, padding:'9px 0', textAlign:'center',
                           border:'1px solid #1A2235', borderRadius:10,
-                          fontFamily:'var(--jb)', fontSize:12, color:'#1A2235',
-                        }}>{p.status==='demo'?t('videoDemo'):t('comingSoon')}</span>
+                          fontFamily:'var(--jb)', fontSize:12, color:'#8892B0',
+                        }}>{p.status==='demo'?'Video Demo':p.status==='opensource'?'Code on GitHub':'Coming Soon'}</span>
                       )}
                     </div>
                   </div>

@@ -2,7 +2,6 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { SKILLS } from '@/lib/constants'
-import { useLanguage } from '@/contexts/LanguageContext'
 
 const FLAT = Object.entries(SKILLS).flatMap(([cat, list]) =>
   list.map(name => ({ name, cat }))
@@ -22,7 +21,6 @@ interface Chip {
 }
 
 export default function Skills() {
-  const { t } = useLanguage()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const mouse     = useRef({ x: -999, y: -999 })
   const chips     = useRef<Chip[]>([])
@@ -159,9 +157,9 @@ export default function Skills() {
         viewport={{ once: true }}
         style={{ textAlign: 'center', marginBottom: 16, zIndex: 10, position: 'relative' }}
       >
-        <p style={{ fontFamily: 'var(--jb)', color: '#00E5FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 6 }}>{t('skillsEyebrow')}</p>
-        <h2 style={{ fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '2.8rem', color: '#F5F5F5', marginBottom: 6 }}>{t('skillsHeading')}</h2>
-        <p style={{ fontFamily: 'var(--jb)', fontSize: 12, color: '#8892B0' }}>{t('skillsSubtitlePrefix')} {FLAT.length} {t('skillsTechnologies')}</p>
+        <p style={{ fontFamily: 'var(--jb)', color: '#00E5FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 6 }}>— SKILLS —</p>
+        <h2 style={{ fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '2.8rem', color: '#F5F5F5', marginBottom: 6 }}>Skill Wall</h2>
+        <p style={{ fontFamily: 'var(--jb)', fontSize: 12, color: '#8892B0' }}>Hover to repel · {FLAT.length} technologies</p>
       </motion.div>
 
       <canvas

@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import '@/styles/mobile-fixes.css'
-import { LanguageProvider } from '@/contexts/LanguageContext'
 import TerminalEgg from '@/components/TerminalEgg'
 import GuidedTour from '@/components/GuidedTour'
 
@@ -26,15 +25,18 @@ const jb = JetBrains_Mono({
   display: 'swap',
 })
 
+const TITLE = 'Kamal Lochan Sahu — Custom Business Software, Automation & AI Engineer'
+const DESCRIPTION = 'I build custom management systems, web/mobile apps, AI integrations and workflow automation for businesses. Full-stack & ML/AI engineer based in India, working with clients worldwide.'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://kamal-portfolio-ten.vercel.app'),
-  title: 'Kamal Lochan Sahu — AI & Robotics Engineer',
-  description: 'I build systems that think, predict, and act — without being told twice.',
-  keywords: ['AI Engineer', 'Robotics', 'Full Stack', 'ML', 'NEXUS', 'CORTEX', 'Germany'],
+  title: TITLE,
+  description: DESCRIPTION,
+  keywords: ['business software', 'management system development', 'workflow automation', 'AI integration', 'full-stack developer India', 'custom software'],
   authors: [{ name: 'Kamal Lochan Sahu' }],
   openGraph: {
-    title: 'Kamal Lochan Sahu — AI & Robotics Engineer',
-    description: 'I build systems that think, predict, and act — without being told twice.',
+    title: TITLE,
+    description: DESCRIPTION,
     url: 'https://kamal-portfolio-ten.vercel.app',
     siteName: 'Kamal Lochan Sahu',
     locale: 'en_US',
@@ -42,8 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'Kamal Lochan Sahu — AI & Robotics Engineer',
-    description: 'I build systems that think, predict, and act — without being told twice.',
+    title: TITLE,
+    description: DESCRIPTION,
   },
 }
 
@@ -51,11 +53,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${sg.variable} ${inter.variable} ${jb.variable}`}>
       <body>
-        <LanguageProvider>
-          {children}
-          <TerminalEgg />
-          <GuidedTour />
-        </LanguageProvider>
+        {children}
+        <TerminalEgg />
+        <GuidedTour />
       </body>
     </html>
   )

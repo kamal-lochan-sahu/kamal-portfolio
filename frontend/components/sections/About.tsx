@@ -1,29 +1,26 @@
 'use client'
 import { motion } from 'framer-motion'
-import { useLanguage } from '@/contexts/LanguageContext'
 
 const LANGS = [
-  { flag: '🇩🇪', name: 'German',  level: 'C1',          color: '#00E5FF' },
   { flag: '🇬🇧', name: 'English', level: 'Professional', color: '#7B61FF' },
   { flag: '🇮🇳', name: 'Hindi',   level: 'Native',       color: '#8892B0' },
   { flag: '🇮🇳', name: 'Odia',    level: 'Native',       color: '#8892B0' },
+  { flag: '🇩🇪', name: 'German',  level: 'A2',           color: '#8892B0' },
   { flag: '🇮🇹', name: 'Italian', level: 'Elementary',   color: '#8892B0' },
 ]
 
 const CERTS = [
   { icon: '☁️',  name: 'AWS Cloud Practitioner', year: '2025', color: '#FF9900' },
   { icon: '🤖', name: 'MIMIC-IV CITI Certified', year: '2025', color: '#00E5FF' },
-  { icon: '🇩🇪', name: 'Goethe C1 German',       year: '2026', color: '#00C853' },
+]
+
+const HIGHLIGHTS = [
+  { label: '8',    sub: 'Business Systems' },
+  { label: '2021', sub: 'Building Since' },
+  { label: '7',    sub: 'AI/ML Projects' },
 ]
 
 export default function About() {
-  const { t } = useLanguage()
-  const HIGHLIGHTS = [
-    { label: '10+', sub: t('highlightSystems') },
-    { label: '3yr', sub: t('highlightSelfLearning') },
-    { label: '7',   sub: t('highlightProjects') },
-    { label: '22',  sub: t('highlightAge') },
-  ]
   return (
     <section id="about" className="snap-sec" style={{ padding: '80px 24px 24px' }}>
       <div className="about-grid" style={{ maxWidth: 1000, width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
@@ -35,20 +32,20 @@ export default function About() {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <p style={{ fontFamily: 'var(--jb)', color: '#7B61FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 10 }}>{t('aboutEyebrow')}</p>
+          <p style={{ fontFamily: 'var(--jb)', color: '#7B61FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 10 }}>— ABOUT —</p>
           <h2 style={{ fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '2.5rem', color: '#F5F5F5', lineHeight: 1.1, marginBottom: 20 }}>
-            {t('aboutWhoIs')}<br /><span style={{ color: '#00E5FF' }}>Kamal</span>?
+            Who is<br /><span style={{ color: '#00E5FF' }}>Kamal</span>?
           </h2>
 
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', color: 'rgba(245,245,245,0.7)', lineHeight: 1.8, marginBottom: 16 }}>
-            {t('aboutBio1')}
+            I&apos;m a self-taught full-stack and ML engineer from Odisha, India. Since 2021 I&apos;ve learned by building: business management systems, AI-powered platforms and automation workflows.
           </p>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', color: 'rgba(245,245,245,0.7)', lineHeight: 1.8, marginBottom: 20 }}>
-            {t('aboutBio2')}
+            I start with your workflow, not with technology: where does manual work slow you down, what breaks, what repeats? Then I design a system around it and automate the rest. I work remotely with clients in any time zone, with clear written updates and milestone-based delivery.
           </p>
 
           {/* Highlights */}
-          <div className="about-highlights-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
+          <div className="about-highlights-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
             {HIGHLIGHTS.map(h => (
               <div key={h.label} style={{ textAlign: 'center', padding: '12px 8px', background: '#0F1624', borderRadius: 10, border: '1px solid #1A2235' }}>
                 <div style={{ fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '1.4rem', color: '#00E5FF' }}>{h.label}</div>
@@ -68,7 +65,7 @@ export default function About() {
         >
           {/* Certifications */}
           <div>
-            <p style={{ fontFamily: 'var(--jb)', fontSize: 12, color: '#8892B0', marginBottom: 12, letterSpacing: '0.1em' }}>{t('certificationsLabel')}</p>
+            <p style={{ fontFamily: 'var(--jb)', fontSize: 12, color: '#8892B0', marginBottom: 12, letterSpacing: '0.1em' }}>CERTIFICATIONS</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {CERTS.map(c => (
                 <div key={c.name} style={{
@@ -88,7 +85,7 @@ export default function About() {
 
           {/* Languages */}
           <div>
-            <p style={{ fontFamily: 'var(--jb)', fontSize: 12, color: '#8892B0', marginBottom: 12, letterSpacing: '0.1em' }}>{t('languagesLabel')}</p>
+            <p style={{ fontFamily: 'var(--jb)', fontSize: 12, color: '#8892B0', marginBottom: 12, letterSpacing: '0.1em' }}>LANGUAGES</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {LANGS.map(l => (
                 <div key={l.name} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 14px', background: '#0F1624', borderRadius: 8, border: '1px solid #1A2235' }}>
@@ -105,7 +102,7 @@ export default function About() {
               📍 Berhampur, Odisha, India
             </p>
             <p style={{ fontFamily: 'var(--jb)', fontSize: 12, color: '#00E5FF', marginTop: 4 }}>
-              {t('openToRelocate')}
+              → Working remotely with clients worldwide
             </p>
           </div>
         </motion.div>

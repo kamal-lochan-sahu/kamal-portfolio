@@ -1,7 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
 import { EMAIL, GITHUB, LINKEDIN } from '@/lib/constants'
-import { useLanguage } from '@/contexts/LanguageContext'
 
 const LINKS = [
   { label: 'LinkedIn',   href: LINKEDIN,                              icon: '💼', color: '#0A66C2' },
@@ -11,7 +10,6 @@ const LINKS = [
 ]
 
 export default function Contact() {
-  const { t } = useLanguage()
   const subject = encodeURIComponent('Opportunity for Kamal Lochan Sahu')
   const body    = encodeURIComponent(
     'Hi Kamal,\n\nI came across your portfolio and I am interested in discussing an opportunity with you.\n\nBest regards,'
@@ -27,13 +25,13 @@ export default function Contact() {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <p style={{ fontFamily: 'var(--jb)', color: '#7B61FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 12 }}>{t('contactEyebrow')}</p>
+          <p style={{ fontFamily: 'var(--jb)', color: '#7B61FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 12 }}>— CONTACT —</p>
           <h2 style={{ fontFamily: 'var(--sg)', fontWeight: 700, fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#F5F5F5', lineHeight: 1.1, marginBottom: 16 }}>
-            {t('contactHeading1')}<br />
-            <span style={{ color: '#00E5FF' }}>{t('contactHeading2')}</span>
+            Have a manual process<br />
+            <span style={{ color: '#00E5FF' }}>eating your time?</span>
           </h2>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', color: 'rgba(245,245,245,0.6)', lineHeight: 1.7, marginBottom: 36, maxWidth: 480, margin: '0 auto 36px' }}>
-            {t('contactBlurb')}
+            Describe it, and I&apos;ll help figure out the right system or automation for it. I reply personally, usually within 24 hours.
           </p>
 
           {/* Smart email CTA */}
@@ -55,7 +53,7 @@ export default function Contact() {
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 40px rgba(0,229,255,0.4)' }}
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 0 0 rgba(0,229,255,0)' }}
           >
-            {t('hireMeEmail')}
+            ✉️  Send Me an Email
           </motion.a>
 
           <p style={{ fontFamily: 'var(--jb)', fontSize: 13, color: '#8892B0', marginBottom: 32 }}>
@@ -96,8 +94,8 @@ export default function Contact() {
           </div>
 
           {/* Footer */}
-          <p style={{ fontFamily: 'var(--jb)', fontSize: 11, color: '#1A2235', marginTop: 48 }}>
-            {t('footerBuiltWith')}
+          <p style={{ fontFamily: 'var(--jb)', fontSize: 11, color: '#8892B0', marginTop: 48 }}>
+            Built with Next.js · Framer Motion · FastAPI · Gemini AI
           </p>
         </motion.div>
       </div>

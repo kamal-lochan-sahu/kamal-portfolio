@@ -13,11 +13,6 @@
     line-height: 1.15 !important;
   }
 
-  /* Hero: stack text above the robot avatar instead of side-by-side */
-  .hero-grid {
-    grid-template-columns: 1fr !important;
-  }
-
   /* Stack skills wall / physics canvas to full width, shorter height */
   .skills-wall-canvas {
     height: 320px !important;
@@ -73,11 +68,7 @@
     left: 16px !important;
   }
 
-  /* Navbar language/sound buttons: slightly tighter on small screens */
-  .language-toggle {
-    padding: 5px 8px !important;
-    font-size: 10px !important;
-  }
+  /* Navbar sound button: slightly tighter on small screens */
   .sound-toggle {
     width: 30px !important;
     height: 30px !important;

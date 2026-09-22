@@ -5,7 +5,7 @@
 let currentUtterance: SpeechSynthesisUtterance | null = null
 
 export function speak(text: string, options?: {
-  rate?: number; pitch?: number; volume?: number; lang?: 'en' | 'de'
+  rate?: number; pitch?: number; volume?: number
 }) {
   if (typeof window === 'undefined') return
   if (!('speechSynthesis' in window)) return
@@ -17,33 +17,18 @@ export function speak(text: string, options?: {
   utterance.rate   = options?.rate   ?? 0.92
   utterance.pitch  = options?.pitch  ?? 1.05
   utterance.volume = options?.volume ?? 0.85
+  utterance.lang   = 'en-US'
 
-  const lang = options?.lang ?? 'en'
   const voices = window.speechSynthesis.getVoices()
-
+  const preferred = ['Google US English', 'Microsoft David', 'Alex', 'Daniel']
   let voice = null
-  if (lang === 'de') {
-    const preferredDe = ['Google Deutsch', 'Microsoft Katja', 'Anna', 'Markus']
-    for (const name of preferredDe) {
-      voice = voices.find(v => v.name.includes(name))
-      if (voice) break
-    }
-    if (!voice) {
-      voice = voices.find(v => v.lang.startsWith('de-DE')) ||
-              voices.find(v => v.lang.startsWith('de'))
-    }
-    utterance.lang = 'de-DE'
-  } else {
-    const preferredEn = ['Google US English', 'Microsoft David', 'Alex', 'Daniel']
-    for (const name of preferredEn) {
-      voice = voices.find(v => v.name.includes(name))
-      if (voice) break
-    }
-    if (!voice) {
-      voice = voices.find(v => v.lang.startsWith('en-US')) ||
-              voices.find(v => v.lang.startsWith('en'))
-    }
-    utterance.lang = 'en-US'
+  for (const name of preferred) {
+    voice = voices.find(v => v.name.includes(name))
+    if (voice) break
+  }
+  if (!voice) {
+    voice = voices.find(v => v.lang.startsWith('en-US')) ||
+            voices.find(v => v.lang.startsWith('en'))
   }
   if (voice) utterance.voice = voice
 

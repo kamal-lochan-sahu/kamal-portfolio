@@ -10,16 +10,14 @@ router = APIRouter(prefix="/api/ask", tags=["Ask Me"])
 limiter = Limiter(key_func=get_remote_address)
 
 SUGGESTIONS = [
+    "What can you build for my clinic?",
+    "How do you automate WhatsApp reminders?",
+    "Show me the retail system",
+    "How does a project with you work?",
+    "Which AI projects have you built?",
+    "What's your tech stack?",
     "Tell me about NEXUS",
-    "Tell me about CORTEX",
-    "Why do you want to work in Germany?",
-    "What is your strongest skill?",
     "Tell me about BioSignal",
-    "How did you learn programming?",
-    "What is your career goal?",
-    "Tell me about GridSense",
-    "Are you open to FIAE Ausbildung?",
-    "What makes you unique as a candidate?",
 ]
 
 class AskRequest(BaseModel):

@@ -35,6 +35,14 @@ export default function AvatarCompanion() {
     return () => document.removeEventListener('pointerdown', onOutside)
   }, [hovered, isTouch])
 
+  // Hero's "Tell me your problem" CTA opens Ask Me directly via this event,
+  // without needing a shared context (full dock state is later work).
+  useEffect(() => {
+    const onOpenAsk = () => { setAskOpen(true); setHovered(false) }
+    window.addEventListener('open-ask-ai', onOpenAsk)
+    return () => window.removeEventListener('open-ask-ai', onOpenAsk)
+  }, [])
+
   return (
     <>
       <div

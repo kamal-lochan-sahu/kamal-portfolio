@@ -1,13 +1,11 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { SECTIONS } from '@/lib/constants'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { playSound, toggleMute, isMuted } from '@/lib/sounds'
 
 export default function Navbar() {
   const [active, setActive] = useState('hero')
-  const { lang, setLang } = useLanguage()
   const [sound, setSound] = useState(!isMuted())
 
   useEffect(() => {
@@ -94,22 +92,6 @@ export default function Navbar() {
         animate={{ opacity: 1, x: 0 }}
         style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 8 }}
       >
-        <button
-          className="language-toggle"
-          onClick={() => {
-            setLang(lang === 'en' ? 'de' : 'en')
-            playSound('click')
-          }}
-          style={{
-            padding: '6px 12px',
-            fontFamily: 'var(--jb)', fontSize: 11,
-            border: '1px solid #1A2235', borderRadius: 8,
-            color: '#8892B0', background: 'transparent', cursor: 'pointer',
-            transition: 'all 0.2s',
-          }}
-        >
-          {lang === 'en' ? '🇬🇧 EN' : '🇩🇪 DE'}
-        </button>
         <button
           className="sound-toggle"
           onClick={() => {

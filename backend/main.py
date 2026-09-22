@@ -12,7 +12,7 @@ limiter = Limiter(key_func=get_remote_address)
 
 app = FastAPI(
     title="Kamal Portfolio API",
-    description="AI-powered backend for kamallochan.dev",
+    description="AI-powered backend for Kamal Lochan Sahu's portfolio",
     version="1.0.0",
 )
 
@@ -23,7 +23,6 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://kamallochan.dev",
     ],
     allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
