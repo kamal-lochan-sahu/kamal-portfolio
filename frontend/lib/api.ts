@@ -42,3 +42,13 @@ export async function getGithubStats() {
     repos: { name: string; description: string | null; stargazers_count: number; language: string | null; html_url: string; updated_at: string }[]
   }>
 }
+
+export async function sendBrief(data: { name: string; email: string; message: string; website?: string }) {
+  const res = await fetch(`${BASE}/api/contact/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  })
+  if (!res.ok) throw new Error('API error')
+  return res.json() as Promise<{ ok: boolean }>
+}

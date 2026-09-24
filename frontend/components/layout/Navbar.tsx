@@ -30,7 +30,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav style={{
+    <nav aria-label="Main navigation" style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       padding: '14px 28px',
@@ -71,6 +71,8 @@ export default function Navbar() {
             key={s.id}
             onClick={() => scrollTo(s.id)}
             title={s.label}
+            aria-label={`Go to ${s.label}`}
+            aria-current={active === s.id ? 'true' : undefined}
             style={{
               borderRadius: 999,
               border: 'none',
@@ -94,6 +96,7 @@ export default function Navbar() {
       >
         <button
           className="sound-toggle"
+          aria-label={sound ? 'Mute sounds' : 'Unmute sounds'}
           onClick={() => {
             const nowMuted = toggleMute()
             setSound(!nowMuted)

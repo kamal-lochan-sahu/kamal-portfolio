@@ -3,13 +3,9 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
-import { PROJECTS } from '@/lib/constants'
+import { PROJECTS, GROUPS } from '@/lib/constants'
 
-const TAB_KEYS = [
-  { key:'flagship',   label:'⭐ Flagship',   filter:(p:typeof PROJECTS[0])=>p.tier===1 },
-  { key:'ai',         label:'🧠 AI Systems', filter:(p:typeof PROJECTS[0])=>p.tier===2 },
-  { key:'production', label:'💼 Production', filter:(p:typeof PROJECTS[0])=>p.tier===3 },
-]
+const TAB_KEYS = GROUPS.filter(g => PROJECTS.some(p => p.group === g.key))
 const STATUS: Record<string,{bg:string;color:string;label:string}> = {
   live: { bg:'rgba(0,200,83,0.1)',   color:'#00C853', label:'🟢 Live'  },
   demo: { bg:'rgba(123,97,255,0.1)', color:'#7B61FF', label:'🎬 Demo'  },
@@ -18,12 +14,12 @@ const STATUS: Record<string,{bg:string;color:string;label:string}> = {
 }
 
 export default function Projects() {
-  const [tab, setTab] = useState('flagship')
-  const shown = PROJECTS.filter(TAB_KEYS.find(x=>x.key===tab)!.filter)
+  const [tab, setTab] = useState(TAB_KEYS[0].key)
+  const shown = PROJECTS.filter(p => p.group === tab)
 
   return (
     <section id="projects" className="snap-sec"
-      style={{ flexDirection:'column', padding:'80px 24px 24px', overflow:'hidden' }}>
+      style={{ flexDirection:'column', padding:'80px 24px 48px', overflow:'hidden' }}>
 
       {/* Gradient blob */}
       <div style={{
@@ -69,7 +65,6 @@ export default function Projects() {
             display:'grid',
             gridTemplateColumns:shown.length===1?'1fr':'repeat(auto-fit,minmax(300px,1fr))',
             gap:18, maxWidth:1100, width:'100%', margin:'0 auto',
-            maxHeight:'calc(100vh - 280px)', overflowY:'auto', paddingRight:4,
           }}>
           {shown.map((p,i) => {
             const st = STATUS[p.status]||STATUS.live

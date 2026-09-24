@@ -8,7 +8,8 @@ import CustomCursor    from '@/components/ui/CustomCursor'
 import Hero     from '@/components/sections/Hero'
 import Skills   from '@/components/sections/Skills'
 import Projects from '@/components/sections/Projects'
-import Journey  from '@/components/sections/Journey'
+import Services from '@/components/sections/Services'
+import Process  from '@/components/sections/Process'
 import About    from '@/components/sections/About'
 import Github   from '@/components/sections/Github'
 import Contact  from '@/components/sections/Contact'
@@ -52,9 +53,10 @@ export default function Home() {
         <Navbar />
         <div className="snap-wrap">
           <Hero />
-          <Skills />
+          <Services />
           <Projects />
-          <Journey />
+          <Process />
+          <Skills />
           <About />
           <Github />
           <Contact />
