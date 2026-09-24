@@ -149,12 +149,15 @@ structure above, nothing else.
 
 async def ask_kamal(question: str) -> str:
     prompt = f"You are Kamal's AI assistant.\n\n{ASK_ME_SYSTEM}\n\nKAMAL'S PROFILE:\n{KAMAL_PROFILE}\n\nUSER QUESTION: {question}\n\nAnswer as Kamal in first person:"
-    response = model.generate_content(prompt)
+    response = await model.generate_content_async(prompt)
     return response.text.strip()
 
 async def match_jd(jd_text: str) -> dict:
     prompt = f"{JD_SYSTEM}\n\nKAMAL'S PROFILE:\n{KAMAL_PROFILE}\n\nJOB DESCRIPTION:\n{jd_text}\n\nReturn JSON:"
-    response = model.generate_content(prompt)
+    response = await model.generate_content_async(
+        prompt,
+        generation_config={"response_mime_type": "application/json"},
+    )
     text = response.text.strip()
     if "```" in text:
         parts = text.split("```")

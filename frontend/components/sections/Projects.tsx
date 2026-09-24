@@ -10,6 +10,7 @@ const STATUS: Record<string,{bg:string;color:string;label:string}> = {
   live: { bg:'rgba(0,200,83,0.1)',   color:'#00C853', label:'🟢 Live'  },
   demo: { bg:'rgba(123,97,255,0.1)', color:'#7B61FF', label:'🎬 Demo'  },
   soon: { bg:'rgba(255,165,0,0.1)',  color:'#FFA500', label:'🔄 Soon'  },
+  selfbuilt: { bg:'rgba(123,97,255,0.1)', color:'#7B61FF', label:'🛠 Self-initiated' },
   opensource: { bg:'rgba(0,229,255,0.1)', color:'#00E5FF', label:'⚡ Open-source' },
 }
 
@@ -158,7 +159,7 @@ export default function Projects() {
                           flex:1, padding:'9px 0', textAlign:'center',
                           border:'1px solid #1A2235', borderRadius:10,
                           fontFamily:'var(--jb)', fontSize:12, color:'#8892B0',
-                        }}>{p.status==='demo'?'Video Demo':p.status==='opensource'?'Code on GitHub':'Coming Soon'}</span>
+                        }}>{p.status==='demo'?'Video Demo':p.status==='opensource'?'Code on GitHub':p.status==='selfbuilt'?'Details on request':'Coming Soon'}</span>
                       )}
                     </div>
                   </div>

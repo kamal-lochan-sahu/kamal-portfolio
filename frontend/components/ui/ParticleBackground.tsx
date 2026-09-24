@@ -16,10 +16,15 @@ export default function ParticleBackground() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    const dpr = Math.min(window.devicePixelRatio || 1, 2)
     let W = window.innerWidth
     let H = window.innerHeight
-    canvas.width  = W
-    canvas.height = H
+    const fit = () => {
+      canvas.width  = W * dpr
+      canvas.height = H * dpr
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    }
+    fit()
 
     const mouse = { x: -9999, y: -9999 }
     const COLORS = ['#00E5FF', '#7B61FF', '#00E5FF', '#00E5FF', '#7B61FF']
@@ -34,7 +39,9 @@ export default function ParticleBackground() {
     }))
 
     let raf = 0
+    let visible = true
     const draw = () => {
+      if (!visible) { raf = 0; return }
       ctx.clearRect(0, 0, W, H)
       particles.forEach(p => {
         // Mouse repel
@@ -75,15 +82,21 @@ export default function ParticleBackground() {
     }
 
     draw()
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting
+      if (visible && !raf) raf = requestAnimationFrame(draw)
+    })
+    io.observe(canvas)
     const onMove = (e: MouseEvent) => { mouse.x = e.clientX; mouse.y = e.clientY }
     const onResize = () => {
       W = window.innerWidth; H = window.innerHeight
-      canvas.width = W; canvas.height = H
+      fit()
     }
     window.addEventListener('mousemove', onMove)
     window.addEventListener('resize', onResize)
     return () => {
       cancelAnimationFrame(raf)
+      io.disconnect()
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('resize', onResize)
     }
@@ -91,7 +104,7 @@ export default function ParticleBackground() {
 
   return (
     <canvas ref={canvasRef} style={{
-      position: 'absolute', inset: 0, zIndex: 0,
+      position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0,
       pointerEvents: 'none', opacity: 0.6,
     }}/>
   )

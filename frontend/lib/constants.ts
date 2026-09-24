@@ -31,6 +31,62 @@ export const SKILLS: Record<string, string[]> = {
 
 export const PROJECTS = [
   {
+    id: 'ecommerce', title: 'E-commerce Store', tier: 3, group: 'business', status: 'selfbuilt',
+    subtitle: 'Online store with payments',
+    tagline: 'Sell online without the spreadsheet chaos.',
+    tags: ['Payments','Inventory'], metric: 'Self-initiated build', github: '#', demo: '#',
+    desc: 'E-commerce store with payment flows and inventory.',
+  },
+  {
+    id: 'automation-hub', title: 'Workflow Automation Hub', tier: 3, group: 'business', status: 'selfbuilt',
+    subtitle: 'Webhooks, schedules, integrations',
+    tagline: 'Repetitive work that runs itself.',
+    tags: ['Webhooks','Schedules','Integrations'], metric: 'Self-initiated build', github: '#', demo: '#',
+    desc: 'Automation hub with webhooks, scheduled jobs and integrations between tools.',
+  },
+  {
+    id: 'clinic', title: 'Clinic Management', tier: 3, group: 'business', status: 'selfbuilt',
+    subtitle: 'Patients, appointments, prescriptions',
+    tagline: 'One place for every patient visit.',
+    tags: ['Patient records','Appointments','Prescriptions'], metric: 'Self-initiated build', github: '#', demo: '#',
+    desc: 'Clinic management with patient records, appointments and prescriptions.',
+  },
+  {
+    id: 'coaching', title: 'Coaching / School Management', tier: 3, group: 'business', status: 'selfbuilt',
+    subtitle: 'Attendance, fees, report cards',
+    tagline: 'Less paperwork, more teaching.',
+    tags: ['Attendance','Fee receipts','Report cards'], metric: 'Self-initiated build', github: '#', demo: '#',
+    desc: 'Coaching and school management with attendance, fee receipts and report cards.',
+  },
+  {
+    id: 'retail', title: 'Retail / Shop Management', tier: 3, group: 'business', status: 'selfbuilt',
+    subtitle: 'POS billing, inventory, invoicing',
+    tagline: 'Billing and stock in one screen.',
+    tags: ['POS billing','Inventory','Invoicing'], metric: 'Self-initiated build', github: '#', demo: '#',
+    desc: 'Retail management with POS billing, inventory and invoicing.',
+  },
+  {
+    id: 'gym', title: 'Gym Management', tier: 3, group: 'business', status: 'selfbuilt',
+    subtitle: 'Plans, check-ins, class booking',
+    tagline: 'Members in, admin out of the way.',
+    tags: ['Plans','Check-ins','Class booking'], metric: 'Self-initiated build', github: '#', demo: '#',
+    desc: 'Gym management with membership plans, check-ins and class booking.',
+  },
+  {
+    id: 'fleet', title: 'Fleet & Logistics', tier: 3, group: 'business', status: 'selfbuilt',
+    subtitle: 'Fleet and logistics management',
+    tagline: 'Know where every vehicle and load is.',
+    tags: ['Logistics'], metric: 'Self-initiated build', github: '#', demo: '#',
+    desc: 'Fleet and logistics management system.',
+  },
+  {
+    id: 'ott', title: 'OTT / Education Streaming', tier: 3, group: 'business', status: 'selfbuilt',
+    subtitle: 'Streaming platform',
+    tagline: 'Video learning on your own platform.',
+    tags: ['Streaming','Education'], metric: 'Self-initiated build', github: '#', demo: '#',
+    desc: 'OTT and education streaming platform.',
+  },
+  {
     id: 'nexus', title: 'NEXUS', tier: 1, group: 'rnd', status: 'soon',
     subtitle: 'Industry 5.0 Robotics Platform',
     tagline: 'Where humans and robots truly collaborate.',
