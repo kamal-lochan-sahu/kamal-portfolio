@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { askKamal, getSuggestions } from '@/lib/api'
+import { askKamal, getSuggestions, type HistoryTurn } from '@/lib/api'
 import { speak, stopSpeaking } from '@/lib/voice'
 import { useVoiceInput } from '@/lib/useVoiceInput'
 
@@ -31,10 +31,13 @@ export default function AskTab({ active }: { active: boolean }) {
     const question = (q || input).trim()
     if (!question || loading) return
     setInput('')
+    const priorTurns: HistoryTurn[] = messages
+      .filter((_, i) => i > 0) // skip the fixed greeting — it's not something Kamal said in this exchange
+      .map(m => ({ role: m.role, text: m.text }))
     setMessages(m => [...m, { role: 'user', text: question }])
     setLoading(true)
     try {
-      const data = await askKamal(question)
+      const data = await askKamal(question, priorTurns)
       setMessages(m => [...m, { role: 'kamal', text: data.answer }])
       if (voiceOn) speak(data.answer)
     } catch {

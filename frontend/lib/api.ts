@@ -1,10 +1,13 @@
 const BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 
-export async function askKamal(question: string) {
+export interface HistoryTurn { role: 'user' | 'kamal'; text: string }
+
+export async function askKamal(question: string, history: HistoryTurn[] = []) {
   const res = await fetch(`${BASE}/api/ask/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ question }),
+    // Backend caps this at 6 turns anyway; trimming here keeps the payload small.
+    body: JSON.stringify({ question, history: history.slice(-6) }),
   })
   if (!res.ok) throw new Error('API error')
   return res.json() as Promise<{ answer: string; question: string }>

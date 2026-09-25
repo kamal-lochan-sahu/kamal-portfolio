@@ -1,5 +1,7 @@
+from typing import Literal
+
 from fastapi import APIRouter, HTTPException, Request
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from services.gemini import ask_kamal
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -20,16 +22,28 @@ SUGGESTIONS = [
     "Tell me about BioSignal",
 ]
 
+
+class HistoryTurn(BaseModel):
+    role: Literal["user", "kamal"]
+    text: str = Field(max_length=500)
+
+
 class AskRequest(BaseModel):
     question: str
+    # Prior turns from this same chat session, oldest first. Capped so a
+    # visitor can't balloon the prompt (and the token bill) from the client.
+    history: list[HistoryTurn] = Field(default_factory=list, max_length=6)
+
 
 class AskResponse(BaseModel):
     answer: str
     question: str
 
+
 @router.get("/suggestions")
 async def suggestions():
     return {"questions": SUGGESTIONS}
+
 
 @router.post("/", response_model=AskResponse)
 @limiter.limit("10/minute")
@@ -39,7 +53,8 @@ async def ask(request: Request, req: AskRequest):
     if len(req.question) > 500:
         raise HTTPException(400, "Too long (max 500 chars)")
     try:
-        answer = await ask_kamal(req.question)
+        history = [h.model_dump() for h in req.history]
+        answer = await ask_kamal(req.question, history=history)
         return AskResponse(answer=answer, question=req.question)
     except Exception as e:
         logger.error(f"ask_kamal failed: {e}")

@@ -1,0 +1,126 @@
+{
+  "personal": {
+    "name": "Kamal Lochan Sahu",
+    "location": "Berhampur, Odisha, India",
+    "focus": "Full-Stack & ML/AI Engineer — business software, automation, AI integration",
+    "email": "kamallochansahu.dev@gmail.com",
+    "github": "github.com/kamal-lochan-sahu",
+    "linkedin": "linkedin.com/in/kamallochansahu"
+  },
+  "background": [
+    "Self-taught developer since 2021, no formal CS degree",
+    "Learned by building: business management systems, AI-powered platforms, automation workflows",
+    "8 production-style business systems built (self-initiated)",
+    "Currently building NEXUS and CORTEX (in development)"
+  ],
+  "languages": {
+    "English": "Professional",
+    "Hindi": "Native",
+    "Odia": "Native",
+    "German": "A2",
+    "Italian": "Elementary"
+  },
+  "certifications": [
+    "AWS Cloud Practitioner (2025)",
+    "MIMIC-IV CITI Ethics Certification — PhysioNet (2025)"
+  ],
+  "skills": {
+    "AI/ML": ["Python", "PyTorch", "TensorFlow", "Scikit-Learn", "LightGBM", "XGBoost", "Prophet", "MLOps"],
+    "Robotics": ["ROS2 Jazzy", "Gazebo Harmonic", "MediaPipe", "YOLOv8", "CLIP", "PPO RL", "CrewAI"],
+    "Backend": ["FastAPI", "Flask", "Node.js", "PostgreSQL", "MongoDB", "Redis", "Docker", "WebSocket"],
+    "Frontend": ["React.js", "Next.js", "TypeScript", "Tailwind", "Framer Motion", "D3.js"],
+    "Cloud": ["AWS (EC2, S3, Lambda)", "Vercel", "Render.com", "HuggingFace"]
+  },
+  "flagship_projects": [
+    {
+      "name": "NEXUS — Industry 5.0 Robotics Platform",
+      "status": "in development",
+      "summary": "6 integrated AI modules on Unitree Go2 quadruped robot simulation",
+      "points": [
+        "NL2RC: Natural language to robot commands via fine-tuned Phi-3-mini + Whisper STT",
+        "CognitiveTwin: Live 3D digital twin, LSTM predicts joint failures",
+        "CoboSense: MediaPipe 33-point pose detection, LSTM predicts human intent (>3m = 100% speed, 2-3m = 60% speed, <1m = STOP — <100ms response)",
+        "RoboRL: PPO reinforcement learning, 500k episodes, >85% success rate",
+        "FlexCell: Multi-robot LLM coordination, 2x Go2 robots, conflict resolution",
+        "EmbodiedGPT: Vision-Language-Action, CLIP+Phi-3-mini+YOLOv8"
+      ],
+      "stack": ["ROS2 Jazzy", "Gazebo", "Phi-3-mini QLoRA", "CLIP", "YOLOv8", "Stable-Baselines3", "FastAPI"]
+    },
+    {
+      "name": "CORTEX — Autonomous Factory Intelligence",
+      "status": "in development",
+      "summary": "6 autonomous AI agents via CrewAI hierarchical orchestration; NEXUS + CORTEX = complete autonomous factory concept (body + brain)",
+      "points": [
+        "SENTINEL: 14 sensor streams, Isolation Forest + LSTM Autoencoder",
+        "ORACLE: XGBoost failure prediction (>85% AUC) + Prophet demand forecast",
+        "OPTIMUS: Live ENTSO-E EU energy optimization, throughput analysis",
+        "GUARDIAN: Cybersecurity, LSTM on network traffic (UNSW-NB15 dataset)",
+        "HERMES: Supply chain LLM reasoning, auto-reorder, supplier risk scoring",
+        "SCRIBE: Natural language factory reports, Factory Health Score 0-100, PDF export"
+      ],
+      "stack": ["CrewAI", "FastAPI", "PostgreSQL", "Redis", "LSTM", "XGBoost", "Prophet", "Phi-3-mini"]
+    },
+    {
+      "name": "BioSignal — ICU Patient Deterioration Prediction",
+      "status": "open-source",
+      "summary": "Predicts deterioration 6 hours before it occurs, using MIMIC-IV (PhysioNet), accessed with CITI ethics certification",
+      "points": [
+        "47 engineered features from 6 vitals (HR, BP, SpO2, Temp, Resp, GCS)",
+        "LightGBM: AUC >85%, Recall >80% | SHAP explainability",
+        "Color-coded risk: Green/Yellow/Red"
+      ],
+      "stack": ["LightGBM", "SHAP", "FastAPI", "Next.js"]
+    },
+    {
+      "name": "GridSense — Real-Time EU Energy Intelligence",
+      "status": "live demo",
+      "url": "gridsense-eight.vercel.app",
+      "summary": "Live ENTSO-E API (real European grid data), directly relevant to the EU's Energiewende policy context",
+      "points": [
+        "24hr forecast: Prophet + XGBoost ensemble | Isolation Forest anomaly detection",
+        "CO2 intensity tracker, weather correlation, WebSocket live updates"
+      ],
+      "stack": ["Next.js", "FastAPI", "Prophet", "XGBoost", "WebSocket"]
+    },
+    {
+      "name": "EarthWatch — Climate Anomaly Detection",
+      "status": "open-source",
+      "summary": "Interactive 3D globe (Globe.gl) with glowing anomaly hotspots, 50+ years historical data, statistical significance scoring",
+      "points": ["5 APIs: NASA POWER, Open-Meteo, Global Carbon Project, NOAA CDO, ReliefWeb"],
+      "stack": ["Next.js", "FastAPI", "Globe.gl", "Isolation Forest", "NASA API", "NOAA"]
+    },
+    {
+      "name": "TruthLens — Multimodal Misinformation Detection",
+      "status": "open-source",
+      "summary": "RoBERTa for text + CLIP for image-text consistency, source credibility scoring",
+      "points": ["Google Fact Check API + ClaimBuster API integration"],
+      "stack": ["RoBERTa", "CLIP", "BeautifulSoup", "FastAPI", "Next.js"]
+    },
+    {
+      "name": "CropSense — AI Crop Recommendation",
+      "status": "live demo",
+      "url": "cropsense-39bz.onrender.com",
+      "summary": "Proof-of-concept for smallholder farmers in India",
+      "points": ["99.32% accuracy Random Forest | 22 crops | 7 soil/climate parameters", "SHAP explainability"],
+      "stack": ["Random Forest", "SHAP", "Flask"]
+    }
+  ],
+  "business_systems": {
+    "summary": "8 self-initiated, production-style business systems",
+    "items": [
+      "E-commerce store with payment flows and inventory",
+      "Workflow automation hub (webhooks, schedules, integrations)",
+      "Clinic management (patient records, appointments, prescriptions)",
+      "Coaching/school management (attendance, fee receipts, report cards)",
+      "Retail/shop management (POS billing, inventory, invoicing)",
+      "Gym management (plans, check-ins, class booking)",
+      "Fleet & logistics management",
+      "OTT/education streaming platform"
+    ],
+    "stack": ["React", "Node.js", "Python", "AWS", "MongoDB"]
+  },
+  "open_to": [
+    "Freelance projects: business software, automation, AI integration",
+    "Remote roles and collaborations"
+  ]
+}
