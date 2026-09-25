@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import Navbar          from '@/components/layout/Navbar'
-import AvatarCompanion from '@/components/avatar/AvatarCompanion'
+import AIDock from '@/components/dock/AIDock'
 import CustomCursor    from '@/components/ui/CustomCursor'
 import Hero     from '@/components/sections/Hero'
 import Skills   from '@/components/sections/Skills'
@@ -61,7 +61,7 @@ export default function Home() {
           <Github />
           <Contact />
         </div>
-        <AvatarCompanion />
+        <AIDock />
       </div>
     </>
   )
