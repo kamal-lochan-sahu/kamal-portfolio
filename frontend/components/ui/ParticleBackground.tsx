@@ -15,6 +15,7 @@ export default function ParticleBackground() {
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
     let W = window.innerWidth

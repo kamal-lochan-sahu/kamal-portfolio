@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { askKamal, getSuggestions } from '@/lib/api'
 import { speak, stopSpeaking } from '@/lib/voice'
+import { useModalA11y } from '@/lib/useModalA11y'
 
 interface Props { open: boolean; onClose: () => void }
 interface Message { role: 'user' | 'kamal'; text: string }
@@ -15,6 +16,7 @@ export default function AskMeModal({ open, onClose }: Props) {
   const [suggestions, setSuggestions] = useState<string[]>([])
   const [voiceOn,     setVoiceOn]     = useState(true)
   const bottomRef = useRef<HTMLDivElement>(null)
+  const modalRef  = useModalA11y<HTMLDivElement>(open, onClose)
 
   useEffect(() => {
     if (open && suggestions.length === 0) {
@@ -69,10 +71,14 @@ export default function AskMeModal({ open, onClose }: Props) {
           animate={{ opacity:1, scale:1,    y:0  }}
           exit={{ opacity:0,    scale:0.93, y:20 }}
           transition={{ duration:0.25, type:'spring', stiffness:300 }}
+          ref={modalRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="ask-me-title"
           onClick={e => e.stopPropagation()}
           className="ai-modal"
           style={{
-            width:'100%', maxWidth:680, height:'80vh', maxHeight:620,
+            width:'100%', maxWidth:680,
             background:'rgba(15,22,36,0.97)',
             border:'1px solid rgba(0,229,255,0.2)',
             borderRadius:20, display:'flex', flexDirection:'column',
@@ -88,7 +94,7 @@ export default function AskMeModal({ open, onClose }: Props) {
             <div style={{ display:'flex', alignItems:'center', gap:10 }}>
               <span style={{ fontSize:22 }}>🤖</span>
               <div>
-                <p style={{ fontFamily:'var(--sg)', fontWeight:700, fontSize:'1rem', color:'#F5F5F5' }}>
+                <p id="ask-me-title" style={{ fontFamily:'var(--sg)', fontWeight:700, fontSize:'1rem', color:'#F5F5F5' }}>
                   Ask Me About Kamal
                 </p>
                 <p style={{ fontFamily:'var(--jb)', fontSize:11, color:'#00E5FF' }}>
@@ -101,6 +107,8 @@ export default function AskMeModal({ open, onClose }: Props) {
               <button
                 onClick={() => { setVoiceOn(v => !v); if (voiceOn) stopSpeaking() }}
                 title={voiceOn ? 'Mute voice' : 'Enable voice'}
+                aria-label={voiceOn ? 'Mute voice' : 'Enable voice'}
+                aria-pressed={voiceOn}
                 style={{
                   width:32, height:32, borderRadius:8,
                   border:`1px solid ${voiceOn ? 'rgba(0,229,255,0.4)' : '#1A2235'}`,
@@ -117,7 +125,7 @@ export default function AskMeModal({ open, onClose }: Props) {
                 border:'1px solid #1A2235', background:'transparent',
                 color:'#8892B0', cursor:'none', fontSize:16,
                 display:'flex', alignItems:'center', justifyContent:'center',
-              }}>✕</button>
+              }} aria-label="Close">✕</button>
             </div>
           </div>
 
@@ -189,14 +197,14 @@ export default function AskMeModal({ open, onClose }: Props) {
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKey}
               placeholder="Ask anything about Kamal..."
-              autoFocus
+              aria-label="Ask a question about Kamal"
               style={{
                 flex:1, padding:'10px 14px',
                 background:'#090E1A', border:'1px solid #1A2235', borderRadius:10,
                 fontFamily:'var(--jb)', fontSize:13, color:'#F5F5F5', outline:'none',
               }}
             />
-            <button onClick={() => send()} disabled={!input.trim()||loading}
+            <button onClick={() => send()} disabled={!input.trim()||loading} aria-label="Send question"
               style={{
                 width:42, height:42, borderRadius:10,
                 background: input.trim()&&!loading ? '#00E5FF' : '#1A2235',

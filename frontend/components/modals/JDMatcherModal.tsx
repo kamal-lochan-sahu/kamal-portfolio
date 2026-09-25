@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { matchJD } from '@/lib/api'
+import { useModalA11y } from '@/lib/useModalA11y'
 
 interface Props { open: boolean; onClose: () => void }
 
@@ -19,6 +20,7 @@ export default function JDMatcherModal({ open, onClose }: Props) {
   const [result,  setResult]  = useState<Result | null>(null)
   const [loading, setLoading] = useState(false)
   const [error,   setError]   = useState('')
+  const modalRef = useModalA11y<HTMLDivElement>(open, onClose)
 
   const analyze = async () => {
     if (!jd.trim() || loading) return
@@ -59,11 +61,14 @@ export default function JDMatcherModal({ open, onClose }: Props) {
           animate={{ opacity: 1, scale: 1,    y: 0  }}
           exit={{ opacity: 0,    scale: 0.94, y: 20 }}
           transition={{ duration: 0.25 }}
+          ref={modalRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="jd-matcher-title"
           onClick={e => e.stopPropagation()}
           className="ai-modal"
           style={{
             width: '100%', maxWidth: 680,
-            maxHeight: '85vh',
             background: '#0F1624',
             border: '1px solid rgba(123,97,255,0.3)',
             borderRadius: 20,
@@ -80,7 +85,7 @@ export default function JDMatcherModal({ open, onClose }: Props) {
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ fontSize: 22 }}>📋</span>
               <div>
-                <p style={{ fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '1rem', color: '#F5F5F5' }}>
+                <p id="jd-matcher-title" style={{ fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '1rem', color: '#F5F5F5' }}>
                   Match Your Job Description
                 </p>
                 <p style={{ fontFamily: 'var(--jb)', fontSize: 11, color: '#7B61FF' }}>
@@ -88,7 +93,7 @@ export default function JDMatcherModal({ open, onClose }: Props) {
                 </p>
               </div>
             </div>
-            <button onClick={onClose} style={{
+            <button onClick={onClose} aria-label="Close" style={{
               width: 32, height: 32, borderRadius: '50%',
               border: '1px solid #1A2235', background: 'transparent',
               color: '#8892B0', cursor: 'pointer', fontSize: 16,

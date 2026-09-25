@@ -41,6 +41,7 @@ export const metadata: Metadata = {
     siteName: 'Kamal Lochan Sahu',
     locale: 'en_US',
     type: 'website',
+    images: ['/opengraph-image'],
   },
   twitter: {
     card: 'summary',
@@ -49,10 +50,32 @@ export const metadata: Metadata = {
   },
 }
 
+const PERSON_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Kamal Lochan Sahu',
+  jobTitle: 'Full-Stack & ML/AI Engineer',
+  description: DESCRIPTION,
+  url: 'https://kamal-portfolio-ten.vercel.app',
+  sameAs: [
+    'https://github.com/kamal-lochan-sahu',
+    'https://linkedin.com/in/kamallochansahu',
+  ],
+  knowsAbout: [
+    'Custom business software', 'Workflow automation', 'AI integration',
+    'Full-stack web development', 'Machine learning',
+  ],
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${sg.variable} ${inter.variable} ${jb.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSON_LD) }}
+        />
         {children}
         <TerminalEgg />
         <GuidedTour />

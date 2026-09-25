@@ -1,17 +1,20 @@
 
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 
 type Emotion = 'idle' | 'namaste' | 'talking' | 'excited' | 'thinking'
 interface Props { emotion?: Emotion; size?: number; showFull?: boolean }
 
 export default function SVGRobot({ emotion = 'idle', size = 200, showFull = true }: Props) {
+  const uid = useId().replace(/:/g, '')
   const groupRef    = useRef<SVGGElement>(null)
   const headRef     = useRef<SVGGElement>(null)
   const lArmRef     = useRef<SVGGElement>(null)
   const rArmRef     = useRef<SVGGElement>(null)
 
   useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) return
     let raf = 0
     const go = () => {
       const t = Date.now() / 1000
@@ -56,24 +59,24 @@ export default function SVGRobot({ emotion = 'idle', size = 200, showFull = true
     <svg viewBox={vb} width={size} height={h}
       style={{ overflow:'visible', filter:'drop-shadow(0 0 24px rgba(0,229,255,0.25))' }}>
       <defs>
-        <linearGradient id="rg1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id={`rg1-${uid}`} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%"   stopColor="#1E2D45"/>
           <stop offset="100%" stopColor="#090E1A"/>
         </linearGradient>
-        <linearGradient id="rg2" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient id={`rg2-${uid}`} x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%"   stopColor="#162035"/>
           <stop offset="100%" stopColor="#070D18"/>
         </linearGradient>
-        <radialGradient id="coreRG" cx="50%" cy="50%" r="50%">
+        <radialGradient id={`coreRG-${uid}`} cx="50%" cy="50%" r="50%">
           <stop offset="0%"   stopColor="#B090FF"/>
           <stop offset="60%"  stopColor="#7B61FF"/>
           <stop offset="100%" stopColor="#5040CC"/>
         </radialGradient>
-        <filter id="glow2">
+        <filter id={`glow2-${uid}`}>
           <feGaussianBlur stdDeviation="2.5" result="b"/>
           <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
-        <filter id="sglow">
+        <filter id={`sglow-${uid}`}>
           <feGaussianBlur stdDeviation="6" result="b"/>
           <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
@@ -83,7 +86,7 @@ export default function SVGRobot({ emotion = 'idle', size = 200, showFull = true
 
         {/* Antenna */}
         <rect x="96" y="-24" width="8" height="24" rx="3" fill="#0F1624"/>
-        <circle cx="100" cy="-28" r="7" fill="#00E5FF" filter="url(#glow2)"
+        <circle cx="100" cy="-28" r="7" fill="#00E5FF" filter={`url(#glow2-${uid})`}
           style={{ animation:'eyeGlow 2s ease-in-out infinite' }}/>
         <circle cx="100" cy="-28" r="3.5" fill="#fff" opacity="0.9"/>
 
@@ -91,7 +94,7 @@ export default function SVGRobot({ emotion = 'idle', size = 200, showFull = true
         <g ref={headRef} style={{ transformOrigin:'100px 50px', transition:'transform 0.1s' }}>
           {/* Outer helm */}
           <path d="M52 8 L42 28 L42 90 L55 102 L145 102 L158 90 L158 28 L148 8 Z"
-            fill="url(#rg1)" stroke="#00E5FF" strokeWidth="1" strokeOpacity="0.3"/>
+            fill={`url(#rg1-${uid})`} stroke="#00E5FF" strokeWidth="1" strokeOpacity="0.3"/>
           {/* Inner visor */}
           <path d="M58 28 L52 40 L52 84 L62 92 L138 92 L148 84 L148 40 L142 28 Z"
             fill="#040B14" stroke="#1A2235" strokeWidth="1"/>
@@ -102,12 +105,12 @@ export default function SVGRobot({ emotion = 'idle', size = 200, showFull = true
           ))}
           {/* Eye L */}
           <rect x="58" y="48" width="34" height="12" rx="5"
-            fill="#00E5FF" filter="url(#glow2)"
+            fill="#00E5FF" filter={`url(#glow2-${uid})`}
             style={{ animation:'eyeGlow 2.5s ease-in-out infinite' }}/>
           <rect x="62" y="51" width="26" height="6" rx="3" fill="#fff" opacity="0.9"/>
           {/* Eye R */}
           <rect x="108" y="48" width="34" height="12" rx="5"
-            fill="#00E5FF" filter="url(#glow2)"
+            fill="#00E5FF" filter={`url(#glow2-${uid})`}
             style={{ animation:'eyeGlow 2.5s ease-in-out infinite 0.4s' }}/>
           <rect x="112" y="51" width="26" height="6" rx="3" fill="#fff" opacity="0.9"/>
           {/* Mouth */}
@@ -119,10 +122,10 @@ export default function SVGRobot({ emotion = 'idle', size = 200, showFull = true
               fill="#fff" opacity="0.8"/>
           ))}
           {/* Ear panels */}
-          <rect x="38" y="44" width="9" height="32" rx="4" fill="url(#rg1)" stroke="#1A2235" strokeWidth="1"/>
+          <rect x="38" y="44" width="9" height="32" rx="4" fill={`url(#rg1-${uid})`} stroke="#1A2235" strokeWidth="1"/>
           <circle cx="42.5" cy="60" r="5" fill="#00E5FF22" stroke="#00E5FF" strokeWidth="1"/>
           <circle cx="42.5" cy="60" r="2" fill="#00E5FF" opacity="0.8"/>
-          <rect x="153" y="44" width="9" height="32" rx="4" fill="url(#rg1)" stroke="#1A2235" strokeWidth="1"/>
+          <rect x="153" y="44" width="9" height="32" rx="4" fill={`url(#rg1-${uid})`} stroke="#1A2235" strokeWidth="1"/>
           <circle cx="157.5" cy="60" r="5" fill="#00E5FF22" stroke="#00E5FF" strokeWidth="1"/>
           <circle cx="157.5" cy="60" r="2" fill="#00E5FF" opacity="0.8"/>
           {/* Helm details */}
@@ -134,7 +137,7 @@ export default function SVGRobot({ emotion = 'idle', size = 200, showFull = true
 
         {/* NECK */}
         <rect x="86" y="102" width="28" height="22" rx="5"
-          fill="url(#rg2)" stroke="#1A2235" strokeWidth="1.5"/>
+          fill={`url(#rg2-${uid})`} stroke="#1A2235" strokeWidth="1.5"/>
         <rect x="90" y="106" width="20" height="14" rx="3" fill="#0A1620"/>
         {[0,1,2].map(i=>(
           <rect key={i} x={92+i*5} y={110} width="3" height="6" rx="1"
@@ -143,7 +146,7 @@ export default function SVGRobot({ emotion = 'idle', size = 200, showFull = true
 
         {/* BODY */}
         <path d="M35 122 L28 145 L28 242 L42 258 L158 258 L172 242 L172 145 L165 122 Z"
-          fill="url(#rg2)" stroke="#1A2235" strokeWidth="1.5"/>
+          fill={`url(#rg2-${uid})`} stroke="#1A2235" strokeWidth="1.5"/>
         {/* Body edge lights */}
         <line x1="35" y1="122" x2="28" y2="242" stroke="#00E5FF" strokeWidth="1" opacity="0.2"/>
         <line x1="165" y1="122" x2="172" y2="242" stroke="#00E5FF" strokeWidth="1" opacity="0.2"/>
@@ -162,7 +165,7 @@ export default function SVGRobot({ emotion = 'idle', size = 200, showFull = true
         <rect x="56" y="145" width="44" height="6" rx="3" fill="#7B61FF" opacity="0.8"/>
         {/* Core */}
         <circle cx="100" cy="185" r="24" fill="#0A1620" stroke="#7B61FF" strokeWidth="1.5"/>
-        <circle cx="100" cy="185" r="17" fill="url(#coreRG)" filter="url(#sglow)"
+        <circle cx="100" cy="185" r="17" fill={`url(#coreRG-${uid})`} filter={`url(#sglow-${uid})`}
           style={{ animation:'coreGlow 2s ease-in-out infinite' }}/>
         <circle cx="100" cy="185" r="9" fill="#E0D0FF"/>
         <circle cx="100" cy="185" r="4" fill="#fff"/>
@@ -181,7 +184,7 @@ export default function SVGRobot({ emotion = 'idle', size = 200, showFull = true
         {/* LEFT ARM */}
         <g ref={lArmRef} style={{ transformOrigin:'35px 130px', transition:'transform 0.05s' }}>
           <rect x="17" y="124" width="24" height="90" rx="9"
-            fill="url(#rg2)" stroke="#1A2235" strokeWidth="1.5"/>
+            fill={`url(#rg2-${uid})`} stroke="#1A2235" strokeWidth="1.5"/>
           <rect x="20" y="150" width="18" height="4" rx="2" fill="#00E5FF" opacity="0.35"/>
           <rect x="20" y="170" width="18" height="4" rx="2" fill="#00E5FF" opacity="0.35"/>
           <circle cx="29" cy="192" r="9" fill="#0A1620" stroke="#00E5FF" strokeWidth="1.2"/>
@@ -197,7 +200,7 @@ export default function SVGRobot({ emotion = 'idle', size = 200, showFull = true
         {/* RIGHT ARM */}
         <g ref={rArmRef} style={{ transformOrigin:'165px 130px', transition:'transform 0.05s' }}>
           <rect x="159" y="124" width="24" height="90" rx="9"
-            fill="url(#rg2)" stroke="#1A2235" strokeWidth="1.5"/>
+            fill={`url(#rg2-${uid})`} stroke="#1A2235" strokeWidth="1.5"/>
           <rect x="162" y="150" width="18" height="4" rx="2" fill="#00E5FF" opacity="0.35"/>
           <rect x="162" y="170" width="18" height="4" rx="2" fill="#00E5FF" opacity="0.35"/>
           <circle cx="171" cy="192" r="9" fill="#0A1620" stroke="#00E5FF" strokeWidth="1.2"/>
@@ -215,14 +218,14 @@ export default function SVGRobot({ emotion = 'idle', size = 200, showFull = true
         <rect x="105" y="256" width="38" height="18" rx="6" fill="#0A1620" stroke="#1A2235" strokeWidth="1"/>
         {/* Left */}
         <rect x="54" y="272" width="44" height="72" rx="9"
-          fill="url(#rg2)" stroke="#1A2235" strokeWidth="1.5"/>
+          fill={`url(#rg2-${uid})`} stroke="#1A2235" strokeWidth="1.5"/>
         <circle cx="76" cy="312" r="9" fill="#0A1620" stroke="#00E5FF" strokeWidth="1"/>
         <rect x="56" y="278" width="40" height="4" rx="2" fill="#00E5FF" opacity="0.25"/>
         <path d="M48 344 L48 353 L98 353 L104 344 Z"
           fill="#0A1620" stroke="#00E5FF" strokeWidth="0.8" strokeOpacity="0.5"/>
         {/* Right */}
         <rect x="102" y="272" width="44" height="72" rx="9"
-          fill="url(#rg2)" stroke="#1A2235" strokeWidth="1.5"/>
+          fill={`url(#rg2-${uid})`} stroke="#1A2235" strokeWidth="1.5"/>
         <circle cx="124" cy="312" r="9" fill="#0A1620" stroke="#00E5FF" strokeWidth="1"/>
         <rect x="104" y="278" width="40" height="4" rx="2" fill="#00E5FF" opacity="0.25"/>
         <path d="M96 344 L102 353 L152 353 L152 344 Z"

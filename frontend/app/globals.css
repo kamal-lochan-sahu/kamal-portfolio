@@ -75,3 +75,23 @@ body {
 ::-webkit-scrollbar-thumb    { background:#1A2235; border-radius:2px; }
 ::-webkit-scrollbar-thumb:hover { background:#00E5FF; }
 ::selection { background:rgba(0,229,255,0.15); color:#00E5FF; }
+
+/* AI modal sizing (dvh-safe; height set here, not inline, so it wins) */
+.ai-modal {
+  height: 80vh;
+  max-height: 620px;
+}
+@supports (height: 80dvh) {
+  .ai-modal { height: 80dvh; }
+}
+
+/* Respect the user's motion preference: kill decorative motion, keep
+   functional transitions instant instead of jarring. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
