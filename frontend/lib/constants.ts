@@ -20,6 +20,7 @@ export const SUB_LINE = "Full Stack & ML Engineer · AI · Robotics · Autonomou
 export const EMAIL    = "kamallochansahu.dev@gmail.com"
 export const GITHUB   = "https://github.com/kamal-lochan-sahu"
 export const LINKEDIN = "https://www.linkedin.com/in/kamallochansahu"
+export const WHATSAPP = "https://wa.me/919439251845"
 
 export const SKILLS: Record<string, string[]> = {
   'AI / ML':    ['Python','Machine Learning','PyTorch','TensorFlow','Scikit-Learn','NumPy','Pandas','LightGBM','XGBoost','Prophet','MLOps'],

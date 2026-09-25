@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { sendBrief } from '@/lib/api'
-import { EMAIL, GITHUB, LINKEDIN } from '@/lib/constants'
+import { EMAIL, GITHUB, LINKEDIN, WHATSAPP } from '@/lib/constants'
 
 const LINKS = [
   { label: 'LinkedIn',   href: LINKEDIN,                              icon: '💼', color: '#0A66C2' },
@@ -83,27 +83,51 @@ export default function Contact() {
           )}
           <p style={{ fontFamily: 'var(--jb)', fontSize: 12, color: '#8892B0', marginBottom: 16 }}>or email directly</p>
 
-          {/* Smart email CTA */}
-          <motion.a
-            href={mailHref}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 10,
-              padding: '12px 32px',
-              background: '#00E5FF',
-              color: '#090E1A',
-              fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '1.05rem',
-              borderRadius: 14, textDecoration: 'none',
-              boxShadow: '0 0 0 0 rgba(0,229,255,0)',
-              transition: 'box-shadow 0.3s',
-              marginBottom: 40,
-            }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 40px rgba(0,229,255,0.4)' }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 0 0 rgba(0,229,255,0)' }}
-          >
-            ✉️  Email Me
-          </motion.a>
+          {/* Smart email CTA + WhatsApp */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 14, marginBottom: 16 }}>
+            <motion.a
+              href={mailHref}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 10,
+                padding: '12px 32px',
+                background: '#00E5FF',
+                color: '#090E1A',
+                fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '1.05rem',
+                borderRadius: 14, textDecoration: 'none',
+                boxShadow: '0 0 0 0 rgba(0,229,255,0)',
+                transition: 'box-shadow 0.3s',
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 40px rgba(0,229,255,0.4)' }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 0 0 rgba(0,229,255,0)' }}
+            >
+              ✉️  Email Me
+            </motion.a>
+
+            <motion.a
+              href={WHATSAPP}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 10,
+                padding: '12px 32px',
+                background: 'rgba(37,211,102,0.12)',
+                border: '1px solid rgba(37,211,102,0.4)',
+                color: '#25D366',
+                fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '1.05rem',
+                borderRadius: 14, textDecoration: 'none',
+                boxShadow: '0 0 0 0 rgba(37,211,102,0)',
+                transition: 'box-shadow 0.3s',
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 40px rgba(37,211,102,0.3)' }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 0 0 rgba(37,211,102,0)' }}
+            >
+              💬  WhatsApp Me
+            </motion.a>
+          </div>
 
           <p style={{ fontFamily: 'var(--jb)', fontSize: 13, color: '#8892B0', marginBottom: 24 }}>
             {EMAIL}
