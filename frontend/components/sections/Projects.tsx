@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
 import { PROJECTS, GROUPS } from '@/lib/constants'
 
-const TAB_KEYS = GROUPS.filter(g => PROJECTS.some(p => p.group === g.key))
+const TAB_KEYS = GROUPS  // show every group's tab, even ones still filling up
 const STATUS: Record<string,{bg:string;color:string;label:string}> = {
   live: { bg:'rgba(0,200,83,0.1)',   color:'#00C853', label:'🟢 Live'  },
   demo: { bg:'rgba(123,97,255,0.1)', color:'#7B61FF', label:'🎬 Demo'  },
@@ -17,6 +17,7 @@ const STATUS: Record<string,{bg:string;color:string;label:string}> = {
 export default function Projects() {
   const [tab, setTab] = useState(TAB_KEYS[0].key)
   const shown = PROJECTS.filter(p => p.group === tab)
+  const isEmpty = shown.length === 0
 
   return (
     <section id="projects" className="snap-sec"
@@ -67,6 +68,19 @@ export default function Projects() {
             gridTemplateColumns:shown.length===1?'1fr':'repeat(auto-fit,minmax(300px,1fr))',
             gap:18, maxWidth:1100, width:'100%', margin:'0 auto',
           }}>
+          {isEmpty && (
+            <div style={{
+              gridColumn:'1/-1', textAlign:'center', padding:'48px 24px',
+              border:'1px dashed #1A2235', borderRadius:16, color:'#8892B0',
+            }}>
+              <p style={{ fontFamily:'var(--sg)', fontWeight:600, fontSize:'1.05rem', color:'#F5F5F5', marginBottom:8 }}>
+                Coming soon
+              </p>
+              <p style={{ fontFamily:'var(--jb)', fontSize:13, lineHeight:1.6 }}>
+                Being finalized right now — check back in a few days.
+              </p>
+            </div>
+          )}
           {shown.map((p,i) => {
             const st = STATUS[p.status]||STATUS.live
             return (
