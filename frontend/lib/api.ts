@@ -55,3 +55,15 @@ export async function sendBrief(data: { name: string; email: string; message: st
   if (!res.ok) throw new Error('API error')
   return res.json() as Promise<{ ok: boolean }>
 }
+
+export interface TourStep { id: string; title: string; message: string }
+
+export async function planTour(interest: string) {
+  const res = await fetch(`${BASE}/api/tour/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ interest }),
+  })
+  if (!res.ok) throw new Error('API error')
+  return res.json() as Promise<{ steps: TourStep[] }>
+}
