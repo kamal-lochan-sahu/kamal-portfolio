@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { playSound } from '@/lib/sounds'
 import { planTour, type TourStep } from '@/lib/api'
+import { trackEvent } from '@/lib/analytics'
 
 const QUICK_PICKS = [
   "I'm hiring for a role",
@@ -39,6 +40,7 @@ export default function GuidedTour() {
   }, [])
 
   const beginWith = async (chosenInterest: string) => {
+    trackEvent('guided_tour_start', { interest: chosenInterest || '(unspecified)' })
     setInterest(chosenInterest)
     setPhase('loading')
     let planned: TourStep[]

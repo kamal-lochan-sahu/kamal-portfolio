@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { matchJD } from '@/lib/api'
+import { trackEvent } from '@/lib/analytics'
 
 interface Result {
   match_score: number
@@ -23,6 +24,7 @@ export default function MatchTab({ active }: { active: boolean }) {
     setLoading(true); setError(''); setResult(null)
     try {
       setResult(await matchJD(jd))
+      trackEvent('jd_match_analyzed')
     } catch {
       setError('Could not analyze. Please try again.')
     }

@@ -2,6 +2,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { STATS, EMAIL } from '@/lib/constants'
+import { trackEvent } from '@/lib/analytics'
 import MagneticButton  from '@/components/ui/MagneticButton'
 import ParticleBackground from '@/components/ui/ParticleBackground'
 
@@ -17,6 +18,7 @@ export default function Hero() {
     document.getElementById(id)?.scrollIntoView({ behavior:'smooth' })
 
   const openAskAI = () => {
+    trackEvent('cta_click', { cta: 'hero_tell_me_your_problem' })
     window.dispatchEvent(new CustomEvent('open-ask-ai'))
   }
 

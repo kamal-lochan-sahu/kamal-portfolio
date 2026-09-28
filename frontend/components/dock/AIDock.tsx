@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SVGRobot from '@/components/avatar/SVGRobot'
 import { useModalA11y } from '@/lib/useModalA11y'
+import { trackEvent } from '@/lib/analytics'
 import AskTab from './AskTab'
 import MatchTab from './MatchTab'
 import BriefTab from './BriefTab'
@@ -24,6 +25,13 @@ const TABS: { key: Tab; label: string; icon: string }[] = [
 export default function AIDock() {
   const [open, setOpen] = useState(false)
   const [tab, setTab] = useState<Tab>('ask')
+
+  const toggle = () => {
+    setOpen(o => {
+      if (!o) trackEvent('ai_dock_open')
+      return !o
+    })
+  }
   const panelRef = useModalA11y<HTMLDivElement>(open, () => setOpen(false))
 
   // Hero's "Tell me your problem" CTA opens the dock straight to Ask Me.
@@ -95,7 +103,7 @@ export default function AIDock() {
       </AnimatePresence>
 
       <motion.button
-        onClick={() => setOpen(o => !o)}
+        onClick={toggle}
         aria-label={open ? 'Close AI assistant' : 'Open AI assistant — ask about Kamal or share a job description'}
         aria-expanded={open}
         whileHover={{ scale: 1.06 }}

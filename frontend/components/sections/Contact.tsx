@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { sendBrief } from '@/lib/api'
 import { EMAIL, GITHUB, LINKEDIN, WHATSAPP } from '@/lib/constants'
+import { trackEvent } from '@/lib/analytics'
 
 const LINKS = [
   { label: 'LinkedIn',   href: LINKEDIN,                              icon: '💼', color: '#0A66C2' },
@@ -29,6 +30,7 @@ export default function Contact() {
     try {
       await sendBrief(form)
       setStatus('sent')
+      trackEvent('generate_lead', { method: 'contact_form' })
     } catch {
       setErr('Could not send from here. Use the email button below instead.')
       setStatus('error')
@@ -87,6 +89,7 @@ export default function Contact() {
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 14, marginBottom: 16 }}>
             <motion.a
               href={mailHref}
+              onClick={() => trackEvent('generate_lead', { method: 'email' })}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               style={{
@@ -109,6 +112,7 @@ export default function Contact() {
               href={WHATSAPP}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent('generate_lead', { method: 'whatsapp' })}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               style={{

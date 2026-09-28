@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { sendBrief } from '@/lib/api'
 import { EMAIL, WHATSAPP } from '@/lib/constants'
+import { trackEvent } from '@/lib/analytics'
 
 const field: React.CSSProperties = {
   width: '100%', padding: '11px 13px', background: '#090E1A', border: '1px solid #1A2235',
@@ -21,6 +22,7 @@ export default function BriefTab({ active }: { active: boolean }) {
     try {
       await sendBrief(form)
       setStatus('sent')
+      trackEvent('generate_lead', { method: 'dock_brief_form' })
     } catch {
       setStatus('error')
     }
