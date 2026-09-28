@@ -2,12 +2,13 @@ import json
 import os
 from pathlib import Path
 
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 
 load_dotenv()
-genai.configure(api_key=os.getenv("GEMINI_API_KEY", ""))
-model = genai.GenerativeModel("gemini-2.5-flash")
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY", ""))
+MODEL = "gemini-2.5-flash"
 
 PROFILE_PATH = Path(__file__).resolve().parent.parent / "data" / "profile.json"
 
@@ -130,15 +131,16 @@ async def ask_kamal(question: str, history: list[dict] | None = None) -> str:
         f"{history_block}"
         f"USER QUESTION: {question}\n\nAnswer as Kamal in first person:"
     )
-    response = await model.generate_content_async(prompt)
+    response = await client.aio.models.generate_content(model=MODEL, contents=prompt)
     return response.text.strip()
 
 
 async def match_jd(jd_text: str) -> dict:
     prompt = f"{JD_SYSTEM}\n\nKAMAL'S PROFILE:\n{KAMAL_PROFILE}\n\nJOB DESCRIPTION:\n{jd_text}\n\nReturn JSON:"
-    response = await model.generate_content_async(
-        prompt,
-        generation_config={"response_mime_type": "application/json"},
+    response = await client.aio.models.generate_content(
+        model=MODEL,
+        contents=prompt,
+        config=types.GenerateContentConfig(response_mime_type="application/json"),
     )
     text = response.text.strip()
     if "```" in text:
@@ -180,9 +182,10 @@ async def plan_tour(interest: str, sections: dict[str, str]) -> list[dict]:
         f"{TOUR_SYSTEM}\n\nAVAILABLE SECTIONS:\n{section_list}\n\n"
         f"VISITOR INTEREST: {visitor_line}\n\nReturn JSON array:"
     )
-    response = await model.generate_content_async(
-        prompt,
-        generation_config={"response_mime_type": "application/json"},
+    response = await client.aio.models.generate_content(
+        model=MODEL,
+        contents=prompt,
+        config=types.GenerateContentConfig(response_mime_type="application/json"),
     )
     text = response.text.strip()
     if "```" in text:
