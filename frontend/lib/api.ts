@@ -40,8 +40,12 @@ export async function matchJD(jd_text: string) {
 export async function getGithubStats() {
   const res = await fetch(`${BASE}/api/github/stats`)
   if (!res.ok) throw new Error('API error')
+  // Backend always returns 200 for this endpoint; user is null when GitHub's
+  // own API failed or rate-limited us, so the caller checks that instead of
+  // relying on a thrown error.
   return res.json() as Promise<{
-    user: { public_repos: number; followers: number; following: number; created_at: string }
+    ok: boolean
+    user: { public_repos: number; followers: number; following: number; created_at: string } | null
     repos: { name: string; description: string | null; stargazers_count: number; language: string | null; html_url: string; updated_at: string }[]
   }>
 }

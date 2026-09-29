@@ -31,8 +31,12 @@ export default function Github() {
     const fetchData = async () => {
       try {
         const data = await getGithubStats()
-        setUser(data.user)
-        setRepos(data.repos || [])
+        if (!data.user) {
+          setError(true)
+        } else {
+          setUser(data.user)
+          setRepos(data.repos || [])
+        }
       } catch {
         setError(true)
       } finally { setLoading(false) }

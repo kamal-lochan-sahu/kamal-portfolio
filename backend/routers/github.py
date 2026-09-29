@@ -1,7 +1,7 @@
 import os
 import time
 import httpx
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
 router = APIRouter(prefix="/api/github", tags=["github"])
 
@@ -27,10 +27,19 @@ async def github_stats():
     """Returns user profile + recent repos. Uses GITHUB_TOKEN if set
     (higher rate limit, accurate follower count); falls back to
     unauthenticated calls otherwise. Cached in-memory for
-    CACHE_TTL_SECONDS to avoid hitting GitHub on every page load."""
+    CACHE_TTL_SECONDS to avoid hitting GitHub on every page load.
+
+    This is decorative content, not a critical path — any upstream
+    failure (rate limit, network error, GitHub outage) degrades to a
+    200 with an empty payload rather than surfacing as our own error
+    status. A visitor's console shouldn't show a red error just because
+    GitHub's API had a bad moment.
+    """
     now = time.time()
     if _cache["data"] is not None and now < _cache["expires_at"]:
         return _cache["data"]
+
+    empty = {"user": None, "repos": [], "ok": False}
 
     async with httpx.AsyncClient(timeout=10) as client:
         try:
@@ -42,22 +51,17 @@ async def github_stats():
                 "?sort=updated&per_page=6",
                 headers=_headers(),
             )
-        except httpx.HTTPError as e:
-            # If a request fails but we have a stale cache, serve it rather
-            # than erroring out the whole GitHub section.
-            if _cache["data"] is not None:
-                return _cache["data"]
-            raise HTTPException(status_code=502, detail=str(e))
+        except httpx.HTTPError:
+            return _cache["data"] if _cache["data"] is not None else empty
 
     if user_res.status_code != 200:
-        if _cache["data"] is not None:
-            return _cache["data"]
-        raise HTTPException(status_code=user_res.status_code, detail="GitHub user fetch failed")
+        return _cache["data"] if _cache["data"] is not None else empty
 
     user = user_res.json()
     repos = repos_res.json() if repos_res.status_code == 200 else []
 
     result = {
+        "ok": True,
         "user": {
             "public_repos": user.get("public_repos", 0),
             "followers": user.get("followers", 0),
