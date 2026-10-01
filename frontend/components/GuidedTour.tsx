@@ -84,7 +84,7 @@ export default function GuidedTour() {
           style={{
             position: 'fixed', bottom: 20, left: 20, zIndex: 50,
             padding: '8px 14px', borderRadius: 20,
-            background: '#0F1624', border: '1px solid #7B61FF', color: '#7B61FF',
+            background: '#0F1624', border: '1px solid #9B87FF', color: '#9B87FF',
             fontSize: 13, cursor: 'none',
           }}
         >
@@ -133,7 +133,7 @@ export default function GuidedTour() {
             </button>
             <button onClick={() => beginWith(interest.trim())} style={{
               padding: '6px 14px', borderRadius: 6, border: 'none',
-              background: '#7B61FF', color: '#fff', fontSize: 13, cursor: 'none',
+              background: '#6A4CFF', color: '#fff', fontSize: 13, cursor: 'none',
             }}>
               Start tour
             </button>
@@ -180,7 +180,7 @@ export default function GuidedTour() {
               </button>
               <button
                 onClick={next}
-                style={{ padding: '6px 12px', borderRadius: 6, border: 'none', background: '#7B61FF', color: '#fff', cursor: 'none' }}
+                style={{ padding: '6px 12px', borderRadius: 6, border: 'none', background: '#6A4CFF', color: '#fff', cursor: 'none' }}
               >
                 {stepIndex + 1 === steps.length ? 'Finish' : 'Next'}
               </button>

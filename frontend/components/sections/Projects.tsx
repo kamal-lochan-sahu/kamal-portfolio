@@ -8,9 +8,9 @@ import { PROJECTS, GROUPS } from '@/lib/constants'
 const TAB_KEYS = GROUPS  // show every group's tab, even ones still filling up
 const STATUS: Record<string,{bg:string;color:string;label:string}> = {
   live: { bg:'rgba(0,200,83,0.1)',   color:'#00C853', label:'🟢 Live'  },
-  demo: { bg:'rgba(123,97,255,0.1)', color:'#7B61FF', label:'🎬 Demo'  },
+  demo: { bg:'rgba(123,97,255,0.1)', color:'#9B87FF', label:'🎬 Demo'  },
   soon: { bg:'rgba(255,165,0,0.1)',  color:'#FFA500', label:'🔄 Soon'  },
-  selfbuilt: { bg:'rgba(123,97,255,0.1)', color:'#7B61FF', label:'🛠 Self-initiated' },
+  selfbuilt: { bg:'rgba(123,97,255,0.1)', color:'#9B87FF', label:'🛠 Self-initiated' },
   opensource: { bg:'rgba(0,229,255,0.1)', color:'#00E5FF', label:'⚡ Open-source' },
 }
 
@@ -33,7 +33,7 @@ export default function Projects() {
       <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}}
         transition={{duration:0.6}} viewport={{once:true}}
         style={{ textAlign:'center', marginBottom:28 }}>
-        <p style={{ fontFamily:'var(--jb)', color:'#7B61FF', fontSize:12, letterSpacing:'0.22em', marginBottom:8 }}>
+        <p style={{ fontFamily:'var(--jb)', color:'#9B87FF', fontSize:12, letterSpacing:'0.22em', marginBottom:8 }}>
           — PROJECTS —
         </p>
         <h2 style={{ fontFamily:'var(--sg)', fontWeight:900, fontSize:'3rem', color:'#F5F5F5' }}>

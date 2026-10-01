@@ -69,7 +69,7 @@ export default function TerminalEgg() {
       >
         <div style={{ maxHeight: 300, overflowY: 'auto', marginBottom: 8 }}>
           {lines.map((l, i) => (
-            <div key={i} style={{ whiteSpace: 'pre-wrap', color: l.startsWith('>') ? '#7B61FF' : '#00E5FF' }}>
+            <div key={i} style={{ whiteSpace: 'pre-wrap', color: l.startsWith('>') ? '#9B87FF' : '#00E5FF' }}>
               {l}
             </div>
           ))}

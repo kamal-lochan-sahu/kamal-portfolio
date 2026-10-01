@@ -56,7 +56,7 @@ export default function MatchTab({ active }: { active: boolean }) {
           {error && <p role="alert" style={{ fontFamily: 'var(--jb)', fontSize: 12, color: '#FF4444', marginTop: 8 }}>{error}</p>}
           <button onClick={analyze} disabled={!jd.trim() || loading} style={{
             width: '100%', padding: '12px 0', marginTop: 14,
-            background: jd.trim() && !loading ? '#7B61FF' : '#1A2235',
+            background: jd.trim() && !loading ? '#6A4CFF' : '#1A2235',
             border: 'none', borderRadius: 10,
             fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '0.95rem',
             color: jd.trim() && !loading ? '#F5F5F5' : '#8892B0',
@@ -110,7 +110,7 @@ export default function MatchTab({ active }: { active: boolean }) {
           </div>
 
           <div style={{ padding: 14, background: 'rgba(123,97,255,0.08)', border: '1px solid rgba(123,97,255,0.3)', borderRadius: 12 }}>
-            <p style={{ fontFamily: 'var(--jb)', fontSize: 11, color: '#7B61FF', marginBottom: 6 }}>RECOMMENDATION</p>
+            <p style={{ fontFamily: 'var(--jb)', fontSize: 11, color: '#9B87FF', marginBottom: 6 }}>RECOMMENDATION</p>
             <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: '#F5F5F5', lineHeight: 1.6 }}>{result.recommendation}</p>
           </div>
 

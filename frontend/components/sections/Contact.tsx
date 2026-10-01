@@ -51,7 +51,7 @@ export default function Contact() {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <p style={{ fontFamily: 'var(--jb)', color: '#7B61FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 12 }}>— CONTACT —</p>
+          <p style={{ fontFamily: 'var(--jb)', color: '#9B87FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 12 }}>— CONTACT —</p>
           <h2 style={{ fontFamily: 'var(--sg)', fontWeight: 700, fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#F5F5F5', lineHeight: 1.1, marginBottom: 16 }}>
             Have a manual process<br />
             <span style={{ color: '#00E5FF' }}>eating your time?</span>

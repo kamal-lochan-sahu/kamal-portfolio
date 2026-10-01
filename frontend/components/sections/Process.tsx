@@ -8,7 +8,7 @@ export default function Process() {
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }} viewport={{ once: true }}
         style={{ textAlign: 'center', marginBottom: 32 }}>
-        <p style={{ fontFamily: 'var(--jb)', color: '#7B61FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 8 }}>— HOW I WORK —</p>
+        <p style={{ fontFamily: 'var(--jb)', color: '#9B87FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 8 }}>— HOW I WORK —</p>
         <h2 style={{ fontFamily: 'var(--sg)', fontWeight: 700, fontSize: 'clamp(2rem,4vw,2.8rem)', color: '#F5F5F5' }}>
           From problem to <span style={{ color: '#00E5FF' }}>working system</span>
         </h2>
@@ -19,7 +19,7 @@ export default function Process() {
           <motion.div key={s.n} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }} viewport={{ once: true }}
             style={{ background: '#0F1624', border: '1px solid #1A2235', borderRadius: 16, padding: 20 }}>
-            <span style={{ fontFamily: 'var(--jb)', fontSize: 12, color: '#7B61FF', fontWeight: 700 }}>{s.n}</span>
+            <span style={{ fontFamily: 'var(--jb)', fontSize: 12, color: '#9B87FF', fontWeight: 700 }}>{s.n}</span>
             <h3 style={{ fontFamily: 'var(--sg)', fontWeight: 600, fontSize: '1rem', color: '#F5F5F5', margin: '8px 0' }}>{s.title}</h3>
             <p style={{ fontSize: 13, lineHeight: 1.6, color: '#8892B0' }}>{s.desc}</p>
           </motion.div>

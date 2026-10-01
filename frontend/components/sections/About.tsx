@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion'
 
 const LANGS = [
-  { flag: '🇬🇧', name: 'English', level: 'Professional', color: '#7B61FF' },
+  { flag: '🇬🇧', name: 'English', level: 'Professional', color: '#9B87FF' },
   { flag: '🇮🇳', name: 'Hindi',   level: 'Native',       color: '#8892B0' },
   { flag: '🇮🇳', name: 'Odia',    level: 'Native',       color: '#8892B0' },
   { flag: '🇩🇪', name: 'German',  level: 'A2',           color: '#8892B0' },
@@ -32,7 +32,7 @@ export default function About() {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <p style={{ fontFamily: 'var(--jb)', color: '#7B61FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 10 }}>— ABOUT —</p>
+          <p style={{ fontFamily: 'var(--jb)', color: '#9B87FF', fontSize: 12, letterSpacing: '0.2em', marginBottom: 10 }}>— ABOUT —</p>
           <h2 style={{ fontFamily: 'var(--sg)', fontWeight: 700, fontSize: '2.5rem', color: '#F5F5F5', lineHeight: 1.1, marginBottom: 20 }}>
             Who is<br /><span style={{ color: '#00E5FF' }}>Kamal</span>?
           </h2>
